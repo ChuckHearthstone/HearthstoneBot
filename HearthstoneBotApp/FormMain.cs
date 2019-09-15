@@ -17,6 +17,11 @@ namespace HearthstoneBotApp
 
         private void ButtonStart_Click(object sender, EventArgs e)
         {
+            if (BotManager.CurrentBot == null)
+            {
+                BotManager.CurrentBot = new DefaultBot();
+            }
+
             if (BotManager.IsRunning)
             {
                 BotManager.Stop();

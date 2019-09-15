@@ -2,7 +2,7 @@
 
 namespace HearthstoneBot.Bot
 {
-    class DefaultBot : IBot
+    public class DefaultBot : IBot
     {
         public void Start()
         {

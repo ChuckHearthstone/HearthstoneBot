@@ -35,9 +35,6 @@ namespace HearthstoneBot
     public class ClientFrozenEventArgs : EventArgs
     {
         // Token: 0x0600114B RID: 4427 RVA: 0x0000D9C2 File Offset: 0x0000BBC2
-        public ClientFrozenEventArgs()
-        {
-        }
     }
 
     public class BotChangedEventArgs : EventArgs
@@ -45,8 +42,8 @@ namespace HearthstoneBot
         // Token: 0x0600114C RID: 4428 RVA: 0x0000D9CA File Offset: 0x0000BBCA
         internal BotChangedEventArgs(IBot old, IBot @new)
         {
-            this.Old = old;
-            this.New = @new;
+            Old = old;
+            New = @new;
         }
 
         // Token: 0x04000836 RID: 2102
@@ -69,7 +66,7 @@ namespace HearthstoneBot
         {
             get
             {
-                return BotManager.BotThread != null;
+                return BotThread != null;
             }
         }
 
@@ -143,11 +140,11 @@ namespace HearthstoneBot
         private static readonly AutoResetEvent autoResetEvent_0 = new AutoResetEvent(false);
         public static bool Stop()
         {
-            object obj = BotManager.object_0;
+            object obj = object_0;
             bool result;
             lock (obj)
             {
-                if (BotManager.BotThread == null)
+                if (BotThread == null)
                 {
                     //BotManager.ilog_0.ErrorFormat("[Stop] The BotThread is not running. Please use BotManager.Start first.", Array.Empty<object>());
                     result = false;
@@ -155,7 +152,7 @@ namespace HearthstoneBot
                 else
                 {
                     //BotManager.ilog_0.InfoFormat("[Stop] Now requesting the BotThread to stop.", Array.Empty<object>());
-                    BotManager.autoResetEvent_0.Set();
+                    autoResetEvent_0.Set();
                     result = true;
                 }
             }
@@ -166,11 +163,11 @@ namespace HearthstoneBot
 
         public static bool Start()
         {
-            object obj = BotManager.object_0;
+            object obj = object_0;
             bool result;
             lock (obj)
             {
-                if (BotManager.IsRunning)
+                if (IsRunning)
                 {
                     //BotManager.ilog_0.ErrorFormat("[Start] The BotThread is already running. Please use BotManager.Stop first.", Array.Empty<object>());
                     result = false;
@@ -180,7 +177,7 @@ namespace HearthstoneBot
                     //BotManager.ilog_0.ErrorFormat("[Start] TritonHs is not initialized yet.", Array.Empty<object>());
                     result = false;
                 }
-                else if (BotManager.CurrentBot == null)
+                else if (CurrentBot == null)
                 {
                     //BotManager.ilog_0.ErrorFormat("[Start] There is no bot to run. Please assign a bot first.", Array.Empty<object>());
                     result = false;
@@ -188,9 +185,9 @@ namespace HearthstoneBot
                 else
                 {
                     //BotManager.ilog_0.InfoFormat("[Start] Now creating the BotThread.", Array.Empty<object>());
-                    BotManager.bool_3 = false;
-                    BotManager.BotThread = new Thread(new ThreadStart(BotManager.smethod_4));
-                    BotManager.BotThread.Start();
+                    bool_3 = false;
+                    BotThread = new Thread(smethod_4);
+                    BotThread.Start();
                     result = true;
                 }
             }
@@ -203,14 +200,14 @@ namespace HearthstoneBot
         {
             get
             {
-                return BotManager.ibot_0;
+                return ibot_0;
             }
             set
             {
-                object obj = BotManager.object_0;
+                object obj = object_0;
                 lock (obj)
                 {
-                    if (BotManager.IsRunning)
+                    if (IsRunning)
                     {
                         throw new InvalidOperationException("The CurrentBot cannot change while the bot is running. Please Stop it first.");
                     }
@@ -218,15 +215,11 @@ namespace HearthstoneBot
                     {
                         throw new InvalidOperationException("The CurrentBot cannot be set to null.");
                     }
-                    if (BotManager.ibot_0 != value)
+                    if (ibot_0 != value)
                     {
-                        IBot old = BotManager.ibot_0;
-                        BotManager.ibot_0 = value;
-                        TritonHs.InvokeEvent(BotManager.eventHandler_0, new object[]
-                        {
-                            null,
-                            new BotChangedEventArgs(old, BotManager.ibot_0)
-                        });
+                        IBot old = ibot_0;
+                        ibot_0 = value;
+                        TritonHs.InvokeEvent(eventHandler_0, null, new BotChangedEventArgs(old, ibot_0));
                     }
                 }
             }
@@ -238,14 +231,14 @@ namespace HearthstoneBot
         {
             get
             {
-                return BotManager.int_1;
+                return int_1;
             }
             set
             {
-                BotManager.int_1 = value;
-                if (BotManager.int_1 < 0)
+                int_1 = value;
+                if (int_1 < 0)
                 {
-                    BotManager.int_1 = 0;
+                    int_1 = 0;
                 }
             }
         }
@@ -254,14 +247,14 @@ namespace HearthstoneBot
         {
             get
             {
-                return BotManager.int_0;
+                return int_0;
             }
             set
             {
-                BotManager.int_0 = value;
-                if (BotManager.int_0 < 0)
+                int_0 = value;
+                if (int_0 < 0)
                 {
-                    BotManager.int_0 = 0;
+                    int_0 = 0;
                 }
                 //BotManager.ilog_0.InfoFormat("[BotManager] MsBetweenTicks = {0}", BotManager.int_0);
             }
@@ -269,7 +262,7 @@ namespace HearthstoneBot
 
         private static void smethod_4()
         {
-            object obj = BotManager.object_0;
+            object obj = object_0;
             lock (obj)
             {
                 Thread.Sleep(1);
@@ -280,74 +273,66 @@ namespace HearthstoneBot
             TritonHs.Memory.Executor.ExecuteWaitTime = 15000;
             try
             {
-                TritonHs.smethod_2(true);
+                TritonHs.smethod_2();
             }
             catch
             {
             }
             try
             {
-                BotManager.smethod_0(BotManager.CurrentBot);
+                smethod_0(CurrentBot);
                 goto IL_FA;
             }
             catch
             {
-                BotManager.autoResetEvent_0.Set();
+                autoResetEvent_0.Set();
                 goto IL_FA;
             }
             IL_87:
             try
             {
-                if (BotManager.MsBeforeNextTick != 0)
+                if (MsBeforeNextTick != 0)
                 {
-                    Thread.Sleep(BotManager.MsBeforeNextTick);
-                    BotManager.MsBeforeNextTick = 0;
+                    Thread.Sleep(MsBeforeNextTick);
+                    MsBeforeNextTick = 0;
                 }
-                BotManager.smethod_1(BotManager.CurrentBot);
-                BotManager.bool_3 = false;
-                if (BotManager.MsBetweenTicks != 0)
+                smethod_1(CurrentBot);
+                bool_3 = false;
+                if (MsBetweenTicks != 0)
                 {
-                    Thread.Sleep(BotManager.MsBetweenTicks);
+                    Thread.Sleep(MsBetweenTicks);
                 }
             }
             catch (InjectionDesyncException)
             {
                 //BotManager.ilog_0.DebugFormat("[BotThreadFunction] An InjectionDesyncException was detected.", Array.Empty<object>());
-                BotManager.bool_3 = true;
-                TritonHs.InvokeEvent(BotManager.eventHandler_1, new object[]
-                {
-                    null,
-                    new ClientFrozenEventArgs()
-                });
+                bool_3 = true;
+                TritonHs.InvokeEvent(eventHandler_1, null, new ClientFrozenEventArgs());
             }
             catch
             {
             }
             IL_FA:
-            if (!BotManager.autoResetEvent_0.WaitOne(0))
+            if (!autoResetEvent_0.WaitOne(0))
             {
                 goto IL_87;
             }
             try
             {
-                BotManager.smethod_2(BotManager.CurrentBot);
+                smethod_2(CurrentBot);
             }
             catch
             {
             }
-            BotManager.BotThread = null;
-            if (BotManager.bool_3)
+            BotThread = null;
+            if (bool_3)
             {
-                TritonHs.InvokeEvent(BotManager.eventHandler_1, new object[]
-                {
-                    null,
-                    new ClientFrozenEventArgs()
-                });
+                TritonHs.InvokeEvent(eventHandler_1, null, new ClientFrozenEventArgs());
                 return;
             }
             try
             {
-                TritonHs.smethod_2(true);
+                TritonHs.smethod_2();
             }
             catch
             {
@@ -355,160 +340,132 @@ namespace HearthstoneBot
         }
 
         private static bool bool_0;
-        private static BotManager.BotEvent botEvent_0;
-        private static BotManager.BotEvent botEvent_1;
+        private static BotEvent botEvent_0;
+        private static BotEvent botEvent_1;
         internal static void smethod_0(IBot ibot_1)
         {
             try
             {
-                object obj = BotManager.object_0;
+                object obj = object_0;
                 lock (obj)
                 {
-                    if (BotManager.bool_0)
+                    if (bool_0)
                     {
                         return;
                     }
-                    BotManager.bool_0 = true;
+                    bool_0 = true;
                 }
-                BotManager.smethod_3(ibot_1, BotManager.botEvent_0);
-                try
+                smethod_3(ibot_1, botEvent_0);
+                using (TritonHs.AcquireFrame())
                 {
-                    using (TritonHs.AcquireFrame())
+                    using (TritonHs.Memory.TemporaryCacheState(false))
                     {
-                        using (TritonHs.Memory.TemporaryCacheState(false))
-                        {
-                            TritonHs.Memory.ClearCache();
-                            ibot_1.Start();
-                        }
+                        TritonHs.Memory.ClearCache();
+                        ibot_1.Start();
                     }
                 }
-                catch (Exception exception)
-                {
-                    //BotManager.ilog_0.Error("[Start] Exception during execution:", exception);
-                    throw;
-                }
-                BotManager.smethod_3(ibot_1, BotManager.botEvent_1);
+
+                smethod_3(ibot_1, botEvent_1);
             }
             finally
             {
-                object obj = BotManager.object_0;
+                object obj = object_0;
                 lock (obj)
                 {
-                    BotManager.bool_0 = false;
+                    bool_0 = false;
                 }
             }
         }
 
-        private static void smethod_3(IBot ibot_1, BotManager.BotEvent botEvent_6)
+        private static void smethod_3(IBot ibot_1, BotEvent botEvent_6)
         {
             if (botEvent_6 == null)
             {
                 return;
             }
-            try
+
+            using (TritonHs.AcquireFrame())
             {
-                using (TritonHs.AcquireFrame())
+                using (TritonHs.Memory.TemporaryCacheState(false))
                 {
-                    using (TritonHs.Memory.TemporaryCacheState(false))
-                    {
-                        botEvent_6(ibot_1);
-                    }
+                    botEvent_6(ibot_1);
                 }
-            }
-            catch (Exception exception)
-            {
-                //BotManager.ilog_0.Error("[Invoke] Error during execution:", exception);
-                throw;
             }
         }
 
         private static bool bool_1;
-        private static BotManager.BotEvent botEvent_2;
-        private static BotManager.BotEvent botEvent_3;
+        private static BotEvent botEvent_2;
+        private static BotEvent botEvent_3;
         internal static void smethod_1(IBot ibot_1)
         {
             try
             {
-                object obj = BotManager.object_0;
+                object obj = object_0;
                 lock (obj)
                 {
-                    if (BotManager.bool_1)
+                    if (bool_1)
                     {
                         return;
                     }
-                    BotManager.bool_1 = true;
+                    bool_1 = true;
                 }
-                BotManager.smethod_3(ibot_1, BotManager.botEvent_2);
-                try
+                smethod_3(ibot_1, botEvent_2);
+                using (TritonHs.AcquireFrame())
                 {
-                    using (TritonHs.AcquireFrame())
+                    using (TritonHs.Memory.TemporaryCacheState(false))
                     {
-                        using (TritonHs.Memory.TemporaryCacheState(false))
-                        {
-                            TritonHs.Memory.ClearCache();
-                            ibot_1.Tick();
-                            TritonHs.smethod_2(false);
-                        }
+                        TritonHs.Memory.ClearCache();
+                        ibot_1.Tick();
+                        TritonHs.smethod_2(false);
                     }
                 }
-                catch (Exception exception)
-                {
-                    //BotManager.ilog_0.Error("[Tick] Exception during execution:", exception);
-                    throw;
-                }
-                BotManager.smethod_3(ibot_1, BotManager.botEvent_3);
+
+                smethod_3(ibot_1, botEvent_3);
             }
             finally
             {
-                object obj = BotManager.object_0;
+                object obj = object_0;
                 lock (obj)
                 {
-                    BotManager.bool_1 = false;
+                    bool_1 = false;
                 }
             }
         }
 
         private static bool bool_2;
-        private static BotManager.BotEvent botEvent_4;
-        private static BotManager.BotEvent botEvent_5;
+        private static BotEvent botEvent_4;
+        private static BotEvent botEvent_5;
         internal static void smethod_2(IBot ibot_1)
         {
             try
             {
-                object obj = BotManager.object_0;
+                object obj = object_0;
                 lock (obj)
                 {
-                    if (BotManager.bool_2)
+                    if (bool_2)
                     {
                         return;
                     }
-                    BotManager.bool_2 = true;
+                    bool_2 = true;
                 }
-                BotManager.smethod_3(ibot_1, BotManager.botEvent_4);
-                try
+                smethod_3(ibot_1, botEvent_4);
+                using (TritonHs.AcquireFrame())
                 {
-                    using (TritonHs.AcquireFrame())
+                    using (TritonHs.Memory.TemporaryCacheState(false))
                     {
-                        using (TritonHs.Memory.TemporaryCacheState(false))
-                        {
-                            TritonHs.Memory.ClearCache();
-                            ibot_1.Stop();
-                        }
+                        TritonHs.Memory.ClearCache();
+                        ibot_1.Stop();
                     }
                 }
-                catch (Exception exception)
-                {
-                    //BotManager.ilog_0.Error("[Stop] Exception during execution:", exception);
-                    throw;
-                }
-                BotManager.smethod_3(ibot_1, BotManager.botEvent_5);
+
+                smethod_3(ibot_1, botEvent_5);
             }
             finally
             {
-                object obj = BotManager.object_0;
+                object obj = object_0;
                 lock (obj)
                 {
-                    BotManager.bool_2 = false;
+                    bool_2 = false;
                 }
             }
         }

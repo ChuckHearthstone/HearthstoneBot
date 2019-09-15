@@ -150,15 +150,13 @@ namespace HearthstoneBot
                         {
                             throw new Exception0();
                         }
-                    IL_343:
-                        this.class61_0.method_4();
-                        this.class61_0.method_3();
-                        this.class63_0.method_1();
                         return;
                     }
                 }
             }
-            goto IL_343;
+            this.class61_0.method_4();
+            this.class61_0.method_3();
+            this.class63_0.method_1();
         }
 
         public void imethod_1(byte[] byte_0)

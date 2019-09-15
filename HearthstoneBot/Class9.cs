@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
@@ -38,5 +39,46 @@ namespace HearthstoneBot
             }
             return false;
         }
+
+        internal static bool smethod_5(string processName,out Mutex mutex_0, out Process process_0)
+        {
+            mutex_0 = null;
+            process_0 = null;
+            bool result;
+            try
+            {
+                process_0 = Process.GetProcessesByName(processName).FirstOrDefault();
+                if (process_0 != null && smethod_6(process_0))
+                {
+                    mutex_0 = smethod_1(process_0.Id, out var flag2);
+                    if (!flag2)
+                    {
+                        mutex_0 = null;
+                        process_0 = null;
+                        //Class9.ilog_0.Error("Invalid PNAME specifier passed to the command line: " +
+                        //                    arguments.Single("pname") + ". This process has already been attached to.");
+                        result = false;
+                    }
+                    else
+                    {
+                        result = true;
+                    }
+                }
+                else
+                {
+                    //Class9.ilog_0.Error("Invalid PNAME specifier passed to the command line: " +
+                    //                    arguments.Single("pname") + ". This process is not a Hearthstone client.");
+                    result = false;
+                }
+            }
+            catch
+            {
+                //Class9.ilog_0.Error("Invalid PNAME specifier passed to the command line: " + arguments.Single("pname"));
+                result = false;
+            }
+
+            return result;
+        }
+
     }
 }

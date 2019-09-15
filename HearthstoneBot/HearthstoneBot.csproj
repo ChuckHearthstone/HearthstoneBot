@@ -64,6 +64,7 @@
     <Compile Include="Class276.cs" />
     <Compile Include="Class40.cs" />
     <Compile Include="Class41.cs" />
+    <Compile Include="Class45.cs" />
     <Compile Include="Class51.cs" />
     <Compile Include="Class52.cs" />
     <Compile Include="Class53.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="ConstsHelper.cs" />
     <Compile Include="d0.cs" />
     <Compile Include="Enums\Enum4.cs" />
+    <Compile Include="Enums\Region.cs" />
     <Compile Include="Exception1.cs" />
     <Compile Include="Hotkeys.cs" />
     <Compile Include="Input.cs" />

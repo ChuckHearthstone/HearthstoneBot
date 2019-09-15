@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel;
 using System.Text;
 using HearthstoneBot.Enums;
 
@@ -6,6 +7,8 @@ namespace HearthstoneBot
 {
     class Class40
     {
+        public static Region Region_0;
+
         public static string string_0;
 
         public string String_2
@@ -26,14 +29,31 @@ namespace HearthstoneBot
 
         private static EventHandler eventHandler_1;
 
-        private bool method_4()
+        public CommunicationState CommunicationState_0
         {
-            return !string.IsNullOrEmpty(String_2);
+            get
+            {
+                return this.aclient_0.State;
+            }
+        }
+        public void method_1()
+        {
+            this.aclient_0.Abort();
+        }
+
+        public void method_2()
+        {
+            this.aclient_0.Close();
         }
 
         private d0 method_3(Enum4 enum4_0, params object[] object_0)
         {
             return aclient_0.Do((byte)enum4_0, object_0);
+        }
+
+        private bool method_4()
+        {
+            return !string.IsNullOrEmpty(String_2);
         }
 
         public d0 method_7(string string_4, string string_5, bool bool_0 = false)

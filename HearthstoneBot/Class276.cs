@@ -215,5 +215,16 @@ namespace HearthstoneBot
             }
             return result;
         }
+
+        internal IntPtr method_2()
+        {
+            var ptr = method_4();
+            return method_17<IntPtr>(intptr_31, ptr);
+        }
+
+        internal IntPtr method_4()
+        {
+            return method_17<IntPtr>(intptr_29, Array.Empty<object>());
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Version = HearthstoneBot.Mapping.Version;
 
@@ -26,7 +27,11 @@ namespace HearthstoneBot
             //this.dispatcherTimer_0 = new DispatcherTimer(TimeSpan.FromSeconds(1.0), DispatcherPriority.Normal, new EventHandler(this.method_9), base.Dispatcher);
             //this.dispatcherTimer_0.Start();
         }
-        
+
+        internal static async Task smethod_0()
+        {
+        }
+
         private void method_21(object object_0)
         {
             try
@@ -58,14 +63,15 @@ namespace HearthstoneBot
                     }
                     if ((long)version != (long)((ulong)Class247.UInt32_1) && (long)clientChangelist != (long)((ulong)Class247.UInt32_2))
                     {
-                        MainWindow.ilog_0.InfoFormat("Hearthstone client version ({0}, {1})", version, clientChangelist);
+                        Console.WriteLine("Hearthstone client version ({0}, {1})", version, clientChangelist);
+                        //MainWindow.ilog_0.InfoFormat("Hearthstone client version ({0}, {1})", version, clientChangelist);
                         new Coroutine(new Func<Task>(MainWindow.Class25.ChuckInstance9.method_2));
-                        Configuration.Instance.AddSettings(MainSettings.Instance);
-                        Configuration.Instance.AddSettings(DevSettings.Instance);
-                        Configuration.Instance.SaveAll();
-                        base.Dispatcher.Invoke(new Action(this.method_23));
-                        BotManager.PreStart += this.method_11;
-                        BotManager.PostStop += this.method_10;
+                        //Configuration.Instance.AddSettings(MainSettings.Instance);
+                        //Configuration.Instance.AddSettings(DevSettings.Instance);
+                        //Configuration.Instance.SaveAll();
+                        //base.Dispatcher.Invoke(new Action(this.method_23));
+                        //BotManager.PreStart += this.method_11;
+                        //BotManager.PostStop += this.method_10;
                         BotManager.Load();
                         base.Dispatcher.Invoke(new Action(this.method_24));
                         this.comboBox_0.Dispatcher.BeginInvoke(new Action(this.method_25), Array.Empty<object>());

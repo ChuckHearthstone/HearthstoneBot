@@ -17,5 +17,10 @@ namespace HearthstoneBot
             Class12.smethod_0();
             Environment.Exit(0);
         }
+
+        internal Task method_2()
+        {
+            return MainWindow.smethod_0();
+        }
     }
 }

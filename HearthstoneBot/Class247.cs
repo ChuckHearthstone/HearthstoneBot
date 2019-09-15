@@ -13,5 +13,13 @@ namespace HearthstoneBot
         public static uint UInt32_0 => 924983404u;
 
         public static string String_0 => "HSB-22115.502894";
+
+        public static uint UInt32_1
+        {
+            get
+            {
+                return 22115u;
+            }
+        }
     }
 }

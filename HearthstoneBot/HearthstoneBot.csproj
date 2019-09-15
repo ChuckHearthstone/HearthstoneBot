@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AClient.cs" />
+    <Compile Include="BotManager.cs" />
     <Compile Include="Class12.cs" />
     <Compile Include="Class13.cs" />
     <Compile Include="Class15.cs" />

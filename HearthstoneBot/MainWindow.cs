@@ -12,7 +12,7 @@ using Version = HearthstoneBot.Mapping.Version;
 
 namespace HearthstoneBot
 {
-    class MainWindow
+    public class MainWindow
     {
         private Mutex mutex_0;
 
@@ -37,7 +37,7 @@ namespace HearthstoneBot
         {
         }
 
-        private void method_21(object object_0)
+        public void method_21(object object_0)
         {
             try
             {

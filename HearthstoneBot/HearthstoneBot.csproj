@@ -55,15 +55,18 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AClient.cs" />
     <Compile Include="BotManager.cs" />
+    <Compile Include="Bot\RoutineManager.cs" />
     <Compile Include="Class12.cs" />
     <Compile Include="Class13.cs" />
     <Compile Include="Class15.cs" />
     <Compile Include="Class229.cs" />
     <Compile Include="Class230.cs" />
+    <Compile Include="Class232.cs" />
     <Compile Include="Class236.cs" />
     <Compile Include="Class237.cs" />
     <Compile Include="Class242.cs" />
@@ -89,13 +92,14 @@
     <Compile Include="Class9.cs" />
     <Compile Include="Common\AssemblyLoader.cs" />
     <Compile Include="Common\CodeCompiler.cs" />
+    <Compile Include="Common\Hotkey.cs" />
     <Compile Include="Common\TypeLoader.cs" />
     <Compile Include="ConstsHelper.cs" />
     <Compile Include="d0.cs" />
     <Compile Include="Enums\Enum4.cs" />
     <Compile Include="Enums\Region.cs" />
     <Compile Include="Exception1.cs" />
-    <Compile Include="Hotkeys.cs" />
+    <Compile Include="Common\Hotkeys.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Interop.cs" />
     <Compile Include="MainWindow.cs" />

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HearthstoneBot
+namespace HearthstoneBot.Common
 {
     public partial class TypeLoader<T> : List<T>
     {
-        class Class237
+        public class Class237
         {
             public Type type_0;
 

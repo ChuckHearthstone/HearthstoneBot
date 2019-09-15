@@ -120,5 +120,20 @@ namespace HearthstoneBot
                 dictionary_2.Add(keyValuePair2.Key, keyValuePair2.Value);
             }
         }
+
+        private static readonly List<uint> list_0 = new List<uint>();
+        internal static void smethod_0()
+        {
+            List<uint> obj = MonoClass.list_0;
+            lock (obj)
+            {
+                int count = MonoClass.list_0.Count;
+                foreach (uint num in MonoClass.list_0)
+                {
+                    MonoClass.Class276_0.method_11(num);
+                }
+                MonoClass.list_0.Clear();
+            }
+        }
     }
 }

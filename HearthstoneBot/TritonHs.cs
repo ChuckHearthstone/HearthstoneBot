@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using GreyMagic;
+using HearthstoneBot.Common;
 
 namespace HearthstoneBot
 {
@@ -66,6 +67,8 @@ namespace HearthstoneBot
                 return TritonHs.class276_0;
             }
         }
+
+        public static bool IsBotFullyLoaded;
 
         internal static bool smethod_0(Process process_0, Delegate6 delegate6_0, out string string_0)
         {
@@ -155,5 +158,45 @@ namespace HearthstoneBot
         }
 
         public static ExternalProcessMemory Memory => externalProcessMemory_0;
+
+        public static void InvokeEvent(Delegate d, params object[] args)
+        {
+            if (d == null)
+            {
+                return;
+            }
+            foreach (Delegate @delegate in d.GetInvocationList())
+            {
+                try
+                {
+                    @delegate.DynamicInvoke(args);
+                }
+                catch (Exception arg)
+                {
+                    //TritonHs.ilog_0.ErrorFormat("[InvokeEvent] Exception during handler: {0}", arg);
+                }
+            }
+        }
+
+        internal static void smethod_2(bool bool_3 = true)
+        {
+            try
+            {
+                if (bool_3)
+                {
+                    using (TritonHs.AcquireFrame())
+                    {
+                        MonoClass.smethod_0();
+                        goto IL_1F;
+                    }
+                }
+                MonoClass.smethod_0();
+                IL_1F:;
+            }
+            catch (Exception exception)
+            {
+                //TritonHs.ilog_0.Error("[CollectGarbage] Exception during execution:", exception);
+            }
+        }
     }
 }

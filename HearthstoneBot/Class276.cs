@@ -475,5 +475,12 @@ namespace HearthstoneBot
             return IntPtr.Zero;
         }
 
+        internal void method_11(uint uint_0)
+        {
+            this.method_17<int>(this.intptr_10, new object[]
+            {
+                uint_0
+            });
+        }
     }
 }

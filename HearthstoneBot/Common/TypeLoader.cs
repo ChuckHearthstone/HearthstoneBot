@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HearthstoneBot.Common
 {
@@ -50,7 +48,9 @@ namespace HearthstoneBot.Common
                     @class.type_0 = enumerator.Current;
                     if (!this.Any(new Func<T, bool>(@class.method_0)))
                     {
-                        base.Add((T)((object)Activator.CreateInstance(@class.type_0, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.CreateInstance, null, this.func_0(), CultureInfo.InvariantCulture)));
+                        base.Add((T) ((object) Activator.CreateInstance(@class.type_0,
+                            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
+                            BindingFlags.CreateInstance, null, this.func_0(), CultureInfo.InvariantCulture)));
                     }
                 }
             }

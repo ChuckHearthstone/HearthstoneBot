@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HearthstoneBot.Bot;
+using HearthstoneBot.Common;
+using log4net.Plugin;
 using Version = HearthstoneBot.Mapping.Version;
 
 namespace HearthstoneBot
@@ -65,7 +70,7 @@ namespace HearthstoneBot
                     {
                         Console.WriteLine("Hearthstone client version ({0}, {1})", version, clientChangelist);
                         //MainWindow.ilog_0.InfoFormat("Hearthstone client version ({0}, {1})", version, clientChangelist);
-                        new Coroutine(new Func<Task>(MainWindow.Class25.ChuckInstance9.method_2));
+                        new Coroutine(new Func<Task>(Class25.Instance.method_2));
                         //Configuration.Instance.AddSettings(MainSettings.Instance);
                         //Configuration.Instance.AddSettings(DevSettings.Instance);
                         //Configuration.Instance.SaveAll();
@@ -73,46 +78,46 @@ namespace HearthstoneBot
                         //BotManager.PreStart += this.method_11;
                         //BotManager.PostStop += this.method_10;
                         BotManager.Load();
-                        base.Dispatcher.Invoke(new Action(this.method_24));
-                        this.comboBox_0.Dispatcher.BeginInvoke(new Action(this.method_25), Array.Empty<object>());
-                        BotManager.OnBotChanged += this.method_6;
+                        this.method_24();
+                        this.method_25();
+                        //BotManager.OnBotChanged += this.method_6;
                         RoutineManager.Load();
-                        base.Dispatcher.Invoke(new Action(this.method_26));
-                        this.comboBox_1.Dispatcher.BeginInvoke(new Action(this.method_27), Array.Empty<object>());
-                        RoutineManager.OnRoutineChanged += this.method_7;
-                        PluginManager.Load();
-                        foreach (IPlugin plugin in PluginManager.Plugins)
-                        {
-                            if (MainSettings.Instance.EnabledPlugins.Contains(plugin.Name))
-                            {
-                                using (TritonHs.AcquireFrame())
-                                {
-                                    PluginManager.Enable(plugin);
-                                }
-                                Thread.Sleep(20);
-                            }
-                            else
-                            {
-                                using (TritonHs.AcquireFrame())
-                                {
-                                    PluginManager.Disable(plugin);
-                                }
-                                Thread.Sleep(20);
-                            }
-                        }
-                        this.listBox_0.Dispatcher.Invoke<IEnumerable>(new Func<IEnumerable>(this.method_28), DispatcherPriority.Normal);
-                        base.Dispatcher.Invoke(new Action(this.method_29));
-                        PluginManager.PluginEnabled += this.method_5;
-                        PluginManager.PluginDisabled += this.method_4;
-                        MainWindow.ilog_0.ErrorFormat("{0}Please read the following guide before using this program:{0}https://github.com/ChuckHearthBuddy/SilverFish/blob/master/ReadMe.md", Environment.NewLine);
-                        base.Dispatcher.Invoke(new Action(this.method_30));
-                        base.Dispatcher.Invoke(new Action(this.method_31));
-                        this.stopwatch_0.Restart();
-                        RoutineManager.OnRoutineChanged += this.method_7;
-                        BotManager.OnBotChanged += this.method_6;
+                        this.method_26();
+                        this.method_27();
+                        //RoutineManager.OnRoutineChanged += this.method_7;
+                        //PluginManager.Load();
+                        //foreach (IPlugin plugin in PluginManager.Plugins)
+                        //{
+                        //    if (MainSettings.Instance.EnabledPlugins.Contains(plugin.Name))
+                        //    {
+                        //        using (TritonHs.AcquireFrame())
+                        //        {
+                        //            PluginManager.Enable(plugin);
+                        //        }
+                        //        Thread.Sleep(20);
+                        //    }
+                        //    else
+                        //    {
+                        //        using (TritonHs.AcquireFrame())
+                        //        {
+                        //            PluginManager.Disable(plugin);
+                        //        }
+                        //        Thread.Sleep(20);
+                        //    }
+                        //}
+                        //this.listBox_0.Dispatcher.Invoke<IEnumerable>(new Func<IEnumerable>(this.method_28), DispatcherPriority.Normal);
+                        this.method_29();
+                        //PluginManager.PluginEnabled += this.method_5;
+                        //PluginManager.PluginDisabled += this.method_4;
+                        //MainWindow.ilog_0.ErrorFormat("{0}Please read the following guide before using this program:{0}https://github.com/ChuckHearthBuddy/SilverFish/blob/master/ReadMe.md", Environment.NewLine);
+                        //base.Dispatcher.Invoke(new Action(this.method_30));
+                        //base.Dispatcher.Invoke(new Action(this.method_31));
+                        //this.stopwatch_0.Restart();
+                        //RoutineManager.OnRoutineChanged += this.method_7;
+                        //BotManager.OnBotChanged += this.method_6;
                         TritonHs.IsBotFullyLoaded = true;
-                        Hotkeys.Register("BotManager.StartStop", Keys.S, ModifierKeys.Alt | ModifierKeys.Shift, new Action<Hotkey>(MainWindow.Class25.ChuckInstance9.method_3));
-                        if (CommandLine.Arguments.Exists("autostart"))
+                        Hotkeys.Register("BotManager.StartStop", Keys.S, ModifierKeys.Alt | ModifierKeys.Shift, Class25.Instance.method_3);
+                        //if (CommandLine.Arguments.Exists("autostart"))
                         {
                             BotManager.Start();
                         }
@@ -126,16 +131,152 @@ namespace HearthstoneBot
                     Class247.UInt32_1,
                     Class247.UInt32_2
                         });
-                        MainWindow.ilog_0.ErrorFormat(text, Array.Empty<object>());
-                        System.Windows.MessageBox.Show(text, "Error", MessageBoxButton.OK, MessageBoxImage.Hand);
-                        base.Dispatcher.BeginInvoke(new Action(base.Close), Array.Empty<object>());
+                        //MainWindow.ilog_0.ErrorFormat(text, Array.Empty<object>());
+                        //System.Windows.MessageBox.Show(text, "Error", MessageBoxButton.OK, MessageBoxImage.Hand);
+                        //base.Dispatcher.BeginInvoke(new Action(base.Close), Array.Empty<object>());
                     }
                 }
             }
             catch (Exception exception)
             {
-                MainWindow.ilog_0.Error("[OnStartup] A top-level exception has been caught.", exception);
+                //MainWindow.ilog_0.Error("[OnStartup] A top-level exception has been caught.", exception);
             }
+        }
+        private void method_24()
+        {
+            foreach (IBot object_ in BotManager.Bots)
+            {
+                this.method_2(object_);
+            }
+        }
+
+        private void method_2(object object_0)
+        {
+            //IConfigurable configurable = object_0 as IConfigurable;
+            //IAuthored authored = object_0 as IAuthored;
+            //if (configurable != null && authored != null)
+            //{
+            //    System.Windows.Controls.UserControl control = configurable.Control;
+            //    if (control != null)
+            //    {
+            //        TabItem newItem = new TabItem
+            //        {
+            //            Header = authored.Name,
+            //            Content = control,
+            //            Tag = object_0
+            //        };
+            //        this.tabControl_1.Items.Add(newItem);
+            //    }
+            //}
+        }
+
+        private void method_25()
+        {
+            List<IBot> bots = BotManager.Bots;
+            //this.comboBox_0.ItemsSource = bots;
+            //if (CommandLine.Arguments.Exists("bot"))
+            //{
+            //    MainWindow.Class26 @class = new MainWindow.Class26();
+            //    @class.string_0 = CommandLine.Arguments.Single("bot");
+            //    IBot bot = bots.FirstOrDefault(new Func<IBot, bool>(@class.method_0));
+            //    if (bot != null)
+            //    {
+            //        this.comboBox_0.SelectedItem = bot;
+            //    }
+            //}
+            //else if (!string.IsNullOrEmpty(MainSettings.Instance.LastBot))
+            //{
+            //    MainWindow.Class27 class2 = new MainWindow.Class27();
+            //    class2.string_0 = MainSettings.Instance.LastBot;
+            //    IBot bot2 = bots.FirstOrDefault(new Func<IBot, bool>(class2.method_0));
+            //    if (bot2 != null)
+            //    {
+            //        this.comboBox_0.SelectedItem = bot2;
+            //    }
+            //}
+            //if (this.comboBox_0.SelectedItem == null)
+            //{
+            //    this.comboBox_0.SelectedItem = bots.FirstOrDefault<IBot>();
+            //}
+            this.method_14();
+        }
+
+        private void method_14()
+        {
+            //foreach (object obj in ((IEnumerable)this.tabControl_1.Items))
+            //{
+            //    TabItem tabItem = (TabItem)obj;
+            //    MainWindow.Class32 @class = new MainWindow.Class32();
+            //    IBot bot = tabItem.Tag as IBot;
+            //    if (bot != null)
+            //    {
+            //        tabItem.Visibility = ((this.comboBox_0.SelectedItem == bot) ? Visibility.Visible : Visibility.Collapsed);
+            //    }
+            //    IRoutine routine = tabItem.Tag as IRoutine;
+            //    if (routine != null)
+            //    {
+            //        tabItem.Visibility = ((this.comboBox_1.SelectedItem == routine) ? Visibility.Visible : Visibility.Collapsed);
+            //    }
+            //    @class.iplugin_0 = (tabItem.Tag as IPlugin);
+            //    if (@class.iplugin_0 != null)
+            //    {
+            //        IPlugin plugin = PluginManager.Plugins.First(new Func<IPlugin, bool>(@class.method_0));
+            //        tabItem.Visibility = (plugin.IsEnabled ? Visibility.Visible : Visibility.Collapsed);
+            //    }
+            //}
+            //TabItem tabItem2 = this.tabControl_1.SelectedItem as TabItem;
+            //if (tabItem2 != null && tabItem2.Visibility == Visibility.Collapsed)
+            //{
+            //    this.tabControl_1.SelectedIndex = 0;
+            //}
+        }
+
+        private void method_26()
+        {
+            foreach (IRoutine object_ in RoutineManager.Routines)
+            {
+                this.method_2(object_);
+            }
+        }
+
+        private void method_27()
+        {
+            //List<IRoutine> routines = RoutineManager.Routines;
+            //this.comboBox_1.ItemsSource = routines;
+            //if (CommandLine.Arguments.Exists("routine"))
+            //{
+            //    MainWindow.Class28 @class = new MainWindow.Class28();
+            //    @class.string_0 = CommandLine.Arguments.Single("routine");
+            //    IRoutine routine = routines.FirstOrDefault(new Func<IRoutine, bool>(@class.method_0));
+            //    if (routine != null)
+            //    {
+            //        this.comboBox_1.SelectedItem = routine;
+            //    }
+            //}
+            //else if (!string.IsNullOrEmpty(MainSettings.Instance.LastRoutine))
+            //{
+            //    MainWindow.Class29 class2 = new MainWindow.Class29();
+            //    class2.string_0 = MainSettings.Instance.LastRoutine;
+            //    IRoutine routine2 = routines.FirstOrDefault(new Func<IRoutine, bool>(class2.method_0));
+            //    if (routine2 != null)
+            //    {
+            //        this.comboBox_1.SelectedItem = routine2;
+            //    }
+            //}
+            //if (this.comboBox_1.SelectedItem == null)
+            //{
+            //    this.comboBox_1.SelectedItem = routines.FirstOrDefault<IRoutine>();
+            //}
+            this.method_14();
+        }
+
+        private void method_29()
+        {
+            //foreach (IPlugin object_ in PluginManager.Plugins)
+            //{
+            //    this.method_2(object_);
+            //}
+            this.method_14();
         }
 
     }

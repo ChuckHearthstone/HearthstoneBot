@@ -21,5 +21,12 @@ namespace HearthstoneBot
                 return 22115u;
             }
         }
+        public static uint UInt32_2
+        {
+            get
+            {
+                return 502894u;
+            }
+        }
     }
 }

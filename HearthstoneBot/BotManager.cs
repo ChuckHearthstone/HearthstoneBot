@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using HearthstoneBot.Common;
 
 namespace HearthstoneBot
 {
@@ -37,9 +35,9 @@ namespace HearthstoneBot
     {
         public delegate void BotEvent(IBot bot);
 
-        public static event BotManager.BotEvent PreStart;
+        public static event BotEvent PreStart;
 
-        public static event BotManager.BotEvent PostStop;
+        public static event BotEvent PostStop;
 
         private static string String_0
         {
@@ -53,20 +51,21 @@ namespace HearthstoneBot
         {
             get
             {
-                return Path.Combine(BotManager.String_0, "Bots");
+                return Path.Combine(String_0, "Bots");
             }
         }
         private static readonly object object_0;
         public static List<IBot> Bots;
+
         public static bool Load()
         {
             try
             {
-                string botsPath = BotManager.BotsPath;
-                object obj = BotManager.object_0;
+                string botsPath = BotsPath;
+                object obj = object_0;
                 lock (obj)
                 {
-                    if (BotManager.Bots != null)
+                    if (Bots != null)
                     {
                         //BotManager.ilog_0.ErrorFormat("[Load] This function can only be called once.", Array.Empty<object>());
                         return false;
@@ -75,14 +74,17 @@ namespace HearthstoneBot
                     {
                         Directory.CreateDirectory(botsPath);
                     }
-                    BotManager.Bots = new List<IBot>();
-                    foreach (IBot bot in new AssemblyLoader<IBot>(botsPath, false).Instances.AsReadOnly())
+                    Bots = new List<IBot>();
+
+                    AssemblyLoader<IBot> loader = new AssemblyLoader<IBot>(botsPath, false);
+                    var types = loader.Instances.AsReadOnly();
+                    foreach (IBot bot in types)
                     {
                         try
                         {
                             //Utility.smethod_0(bot);
                             bot.Initialize();
-                            BotManager.Bots.Add(bot);
+                            Bots.Add(bot);
                         }
                         catch (Exception exception)
                         {

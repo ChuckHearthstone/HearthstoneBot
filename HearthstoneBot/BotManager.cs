@@ -55,6 +55,12 @@ namespace HearthstoneBot
 
     class BotManager
     {
+        static BotManager()
+        {
+            BotManager.object_0 = new object();
+            BotManager.MsBetweenTicks = 15;
+        }
+
         public delegate void BotEvent(IBot bot);
 
         public static event BotEvent PreStart;
@@ -178,21 +184,25 @@ namespace HearthstoneBot
             {
                 if (IsRunning)
                 {
+                    Console.WriteLine("[Start] The BotThread is already running. Please use BotManager.Stop first.");
                     //BotManager.ilog_0.ErrorFormat("[Start] The BotThread is already running. Please use BotManager.Stop first.", Array.Empty<object>());
                     result = false;
                 }
                 else if (!TritonHs.Initialized)
                 {
+                    Console.WriteLine("[Start] TritonHs is not initialized yet.");
                     //BotManager.ilog_0.ErrorFormat("[Start] TritonHs is not initialized yet.", Array.Empty<object>());
                     result = false;
                 }
                 else if (CurrentBot == null)
                 {
+                    Console.WriteLine("[Start] There is no bot to run. Please assign a bot first.");
                     //BotManager.ilog_0.ErrorFormat("[Start] There is no bot to run. Please assign a bot first.", Array.Empty<object>());
                     result = false;
                 }
                 else
                 {
+                    Console.WriteLine("[Start] Now creating the BotThread.");
                     //BotManager.ilog_0.InfoFormat("[Start] Now creating the BotThread.", Array.Empty<object>());
                     bool_3 = false;
                     BotThread = new Thread(smethod_4);

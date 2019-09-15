@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HearthstoneBot", "Hearthsto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HearthstoneBot.Test", "HearthstoneBot.Test\HearthstoneBot.Test.csproj", "{213D7E5B-4530-41C9-8467-17ECA354E997}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HearthstoneBotApp", "HearthstoneBotApp\HearthstoneBotApp.csproj", "{4021DDA5-B21C-415B-9F14-38A485EAE234}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{213D7E5B-4530-41C9-8467-17ECA354E997}.Release|Any CPU.Build.0 = Release|Any CPU
 		{213D7E5B-4530-41C9-8467-17ECA354E997}.Release|x86.ActiveCfg = Release|x86
 		{213D7E5B-4530-41C9-8467-17ECA354E997}.Release|x86.Build.0 = Release|x86
+		{4021DDA5-B21C-415B-9F14-38A485EAE234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4021DDA5-B21C-415B-9F14-38A485EAE234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4021DDA5-B21C-415B-9F14-38A485EAE234}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4021DDA5-B21C-415B-9F14-38A485EAE234}.Debug|x86.Build.0 = Debug|Any CPU
+		{4021DDA5-B21C-415B-9F14-38A485EAE234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4021DDA5-B21C-415B-9F14-38A485EAE234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4021DDA5-B21C-415B-9F14-38A485EAE234}.Release|x86.ActiveCfg = Release|Any CPU
+		{4021DDA5-B21C-415B-9F14-38A485EAE234}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -32,5 +32,14 @@ namespace HearthstoneBot
                 this.struct9_0[(int)num2].method_0();
             }
         }
+
+        public void method_1()
+        {
+            uint num = 1u << this.int_0 + this.int_1;
+            for (uint num2 = 0u; num2 < num; num2 += 1u)
+            {
+                this.struct9_0[(int)num2].method_1();
+            }
+        }
     }
 }

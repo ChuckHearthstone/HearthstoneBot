@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HearthstoneBot
+﻿namespace HearthstoneBot
 {
     struct Struct9
     {
@@ -13,6 +7,14 @@ namespace HearthstoneBot
         public void method_0()
         {
             this.struct12_0 = new Struct12[768];
+        }
+
+        public void method_1()
+        {
+            for (int i = 0; i < 768; i++)
+            {
+                this.struct12_0[i].method_1();
+            }
         }
     }
 }

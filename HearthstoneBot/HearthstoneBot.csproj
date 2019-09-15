@@ -69,6 +69,7 @@
     <Compile Include="Class54.cs" />
     <Compile Include="Class60.cs" />
     <Compile Include="Class61.cs" />
+    <Compile Include="Class63.cs" />
     <Compile Include="Class9.cs" />
     <Compile Include="ConstsHelper.cs" />
     <Compile Include="d0.cs" />

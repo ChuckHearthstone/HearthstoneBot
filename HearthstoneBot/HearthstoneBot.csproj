@@ -40,6 +40,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AClient.cs" />
+    <Compile Include="Class12.cs" />
+    <Compile Include="Class15.cs" />
     <Compile Include="Class242.cs" />
     <Compile Include="Class243.cs" />
     <Compile Include="Class244.cs" />
@@ -57,8 +62,18 @@
     <Compile Include="Class247.cs" />
     <Compile Include="Class248.cs" />
     <Compile Include="Class276.cs" />
+    <Compile Include="Class40.cs" />
+    <Compile Include="Class41.cs" />
+    <Compile Include="Class52.cs" />
+    <Compile Include="Class53.cs" />
+    <Compile Include="Class54.cs" />
+    <Compile Include="Class60.cs" />
+    <Compile Include="Class61.cs" />
     <Compile Include="Class9.cs" />
     <Compile Include="ConstsHelper.cs" />
+    <Compile Include="d0.cs" />
+    <Compile Include="Enums\Enum4.cs" />
+    <Compile Include="Exception1.cs" />
     <Compile Include="Hotkeys.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Interop.cs" />
@@ -66,6 +81,10 @@
     <Compile Include="MouseHook.cs" />
     <Compile Include="ProcessHookManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="r0.cs" />
+    <Compile Include="Struct12.cs" />
+    <Compile Include="Struct14.cs" />
+    <Compile Include="Struct9.cs" />
     <Compile Include="TritonHs.cs" />
   </ItemGroup>
   <ItemGroup>

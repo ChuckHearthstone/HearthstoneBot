@@ -122,8 +122,8 @@ namespace HearthstoneBot
                         Hotkeys.Register("BotManager.StartStop", Keys.S, ModifierKeys.Alt | ModifierKeys.Shift, Class25.Instance.method_3);
                         //if (CommandLine.Arguments.Exists("autostart"))
                         {
-                            var bot = new DefaultBot();
-                            BotManager.CurrentBot = bot;
+                            //var bot = new DefaultBot();
+                            //BotManager.CurrentBot = bot;
                             BotManager.Start();
                         }
                     }

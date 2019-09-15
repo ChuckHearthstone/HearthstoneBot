@@ -54,7 +54,7 @@ namespace HearthstoneBot.Bot
         public IBot New;
     }
 
-    class BotManager
+    public class BotManager
     {
         static BotManager()
         {

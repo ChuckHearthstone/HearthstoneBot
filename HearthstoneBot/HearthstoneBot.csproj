@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Auth\AClient.cs" />
     <Compile Include="Bot\BotManager.cs" />
+    <Compile Include="Bot\DefaultBot.cs" />
     <Compile Include="Bot\RoutineManager.cs" />
     <Compile Include="Class12.cs" />
     <Compile Include="Class13.cs" />

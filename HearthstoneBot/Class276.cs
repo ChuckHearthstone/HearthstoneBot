@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using GreyMagic;
@@ -391,6 +392,87 @@ namespace HearthstoneBot
             {
                 intptr_37
             });
+        }
+
+        internal IntPtr method_34(IntPtr intptr_37, string string_0)
+        {
+            while (intptr_37 != IntPtr.Zero)
+            {
+                using (AllocatedMemory allocatedMemory = this.externalProcessMemory_0.CreateAllocatedMemory(256))
+                {
+                    allocatedMemory.AllocateOfChunk<IntPtr>("Itr");
+                    IntPtr intPtr;
+                    while ((intPtr = this.method_36(intptr_37, allocatedMemory["Itr"])) != IntPtr.Zero)
+                    {
+                        IntPtr address = this.method_38(intPtr);
+                        if (this.externalProcessMemory_0.ReadStringA(address) == string_0)
+                        {
+                            return intPtr;
+                        }
+                    }
+                }
+                intptr_37 = this.method_25(intptr_37);
+            }
+            return IntPtr.Zero;
+        }
+
+        internal IntPtr method_36(IntPtr intptr_37, IntPtr intptr_38)
+        {
+            return this.method_17<IntPtr>(this.intptr_8, new object[]
+            {
+                intptr_37,
+                intptr_38
+            });
+        }
+
+        internal IntPtr method_38(IntPtr intptr_37)
+        {
+            return this.method_17<IntPtr>(this.intptr_30, new object[]
+            {
+                intptr_37
+            });
+        }
+
+        internal IntPtr method_25(IntPtr intptr_37)
+        {
+            return this.method_17<IntPtr>(this.intptr_28, new object[]
+            {
+                intptr_37
+            });
+        }
+
+        internal IntPtr method_21(string string_0, string string_1, string string_2)
+        {
+            IntPtr value = this.method_29();
+            IntPtr intPtr = this.method_30();
+            //value != intPtr;
+            if (intPtr == IntPtr.Zero)
+            {
+                throw new Exception("Code is not running on a mono thread!");
+            }
+            int num;
+            IntPtr intptr_ = this.method_40(string_0, out num);
+            this.method_16(intptr_, "Could not load assembly. Status: " + num);
+            IntPtr intptr_2 = this.method_39(intptr_);
+            this.method_16(intptr_2, "Could not open mono image. Status: " + num);
+            using (IEnumerator<IntPtr> enumerator = this.method_44(intptr_2).GetEnumerator())
+            {
+                while (enumerator.MoveNext())
+                {
+                    IntPtr intPtr2 = enumerator.Current;
+                    if (intPtr2 != IntPtr.Zero)
+                    {
+                        string a = this.method_45(intPtr2);
+                        string a2 = this.method_46(intPtr2);
+                        if (a == string_2 && a2 == string_1)
+                        {
+                            return intPtr2;
+                        }
+                    }
+                }
+            }
+            Debugger.Break();
+            return IntPtr.Zero;
         }
 
     }

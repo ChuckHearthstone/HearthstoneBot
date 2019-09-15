@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
+using Version = HearthstoneBot.Mapping.Version;
 
 namespace HearthstoneBot
 {

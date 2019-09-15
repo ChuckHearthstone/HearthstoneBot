@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using GreyMagic;
 
 namespace HearthstoneBot
@@ -29,6 +30,30 @@ namespace HearthstoneBot
                     intptr_0 = Interop.smethod_0(Memory.Process, "UnityWndClass");
                 }
                 return intptr_0;
+            }
+        }
+
+        public static string MainAssemblyDir
+        {
+            get
+            {
+                return Path.Combine(Path.GetDirectoryName(TritonHs.Memory.Process.MainModule.FileName), "Hearthstone_Data", "Managed");
+            }
+        }
+
+        public static string UnityEngineAssemblyPath
+        {
+            get
+            {
+                return Path.Combine(TritonHs.MainAssemblyDir, "UnityEngine.dll");
+            }
+        }
+
+        public static string MainAssemblyPath
+        {
+            get
+            {
+                return Path.Combine(TritonHs.MainAssemblyDir, "Assembly-CSharp.dll");
             }
         }
 

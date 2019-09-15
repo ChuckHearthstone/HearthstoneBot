@@ -40,5 +40,23 @@ namespace HearthstoneBot
             this.struct14_2.method_0();
         }
 
+        public uint method_2(Class63 class63_0, uint uint_1)
+        {
+            if (this.struct12_0.method_2(class63_0) == 0u)
+            {
+                return this.struct14_0[(int)uint_1].method_1(class63_0);
+            }
+            uint num = 8u;
+            if (this.struct12_1.method_2(class63_0) == 0u)
+            {
+                num += this.struct14_1[(int)uint_1].method_1(class63_0);
+            }
+            else
+            {
+                num += 8u;
+                num += this.struct14_2.method_1(class63_0);
+            }
+            return num;
+        }
     }
 }

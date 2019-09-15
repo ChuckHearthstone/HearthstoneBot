@@ -61,5 +61,52 @@ namespace HearthstoneBot
             }
             uint_1 = uint_0;
         }
+
+        public void method_5(uint uint_3, uint uint_4)
+        {
+            uint num = this.uint_0 - uint_3 - 1u;
+            if (num >= this.uint_2)
+            {
+                num += this.uint_2;
+            }
+            while (uint_4 > 0u)
+            {
+                if (num >= this.uint_2)
+                {
+                    num = 0u;
+                }
+                byte[] array = this.byte_0;
+                uint num2 = this.uint_0;
+                this.uint_0 = num2 + 1u;
+                array[(int)num2] = this.byte_0[(int)num++];
+                if (this.uint_0 >= this.uint_2)
+                {
+                    this.method_4();
+                }
+                uint_4 -= 1u;
+            }
+        }
+
+        public void method_6(byte byte_1)
+        {
+            byte[] array = this.byte_0;
+            uint num = this.uint_0;
+            this.uint_0 = num + 1u;
+            array[(int)num] = byte_1;
+            if (this.uint_0 >= this.uint_2)
+            {
+                this.method_4();
+            }
+        }
+
+        public byte method_7(uint uint_3)
+        {
+            uint num = this.uint_0 - uint_3 - 1u;
+            if (num >= this.uint_2)
+            {
+                num += this.uint_2;
+            }
+            return this.byte_0[(int)num];
+        }
     }
 }

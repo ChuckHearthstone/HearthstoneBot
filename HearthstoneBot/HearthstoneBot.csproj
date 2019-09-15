@@ -85,6 +85,7 @@
     <Compile Include="r0.cs" />
     <Compile Include="Struct12.cs" />
     <Compile Include="Struct14.cs" />
+    <Compile Include="Struct8.cs" />
     <Compile Include="Struct9.cs" />
     <Compile Include="TritonHs.cs" />
   </ItemGroup>

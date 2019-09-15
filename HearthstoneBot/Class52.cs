@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace HearthstoneBot
 {
+    internal interface Interface1
+    {
+        // Token: 0x060003F9 RID: 1017
+        void imethod_0(long long_0, long long_1);
+    }
+
     class Class52
     {
         private Class53 class53_0 = new Class53();
@@ -28,7 +34,7 @@ namespace HearthstoneBot
         public void imethod_0(Stream stream_0, Stream stream_1, long long_0, long long_1, Interface1 interface1_0)
         {
             this.method_3(stream_0, stream_1);
-            Class51.Struct8 @struct = default(Class51.Struct8);
+            Struct8 @struct = default(Struct8);
             @struct.method_0();
             uint num = 0u;
             uint num2 = 0u;

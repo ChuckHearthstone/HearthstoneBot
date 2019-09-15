@@ -34,18 +34,16 @@ namespace HearthstoneBot
                 string text;
                 if (this.process_0 == null)
                 {
-                    Console.WriteLine("");
+                    MessageBox.Show("can not find process");
                     return;
                 }
-                else if (!TritonHs.smethod_0(this.process_0, new TritonHs.Delegate6(Class12.smethod_4), out text))
+                else if (!TritonHs.smethod_0(this.process_0, Class12.smethod_4, out text))
                 {
-                    MainWindow.ilog_0.Error(text);
-                    System.Windows.MessageBox.Show(text, "Error", MessageBoxButton.OK, MessageBoxImage.Hand);
-                    base.Dispatcher.BeginInvoke(new Action(base.Close), Array.Empty<object>());
+                    MessageBox.Show("TritonHs.smethod_0 == false");
                 }
                 else
                 {
-                    TritonHs.Memory.ProcessExited += MainWindow.Class25.ChuckInstance9.method_1;
+                    TritonHs.Memory.ProcessExited += Class25.Instance.method_1;
                     TritonHs.Memory.Executor.FrameDropWaitTime = 15000u;
                     TritonHs.Memory.Executor.ExecuteWaitTime = 15000;
                     TritonHs.Memory.DisableCache();
@@ -54,8 +52,8 @@ namespace HearthstoneBot
                     int clientChangelist;
                     using (TritonHs.AcquireFrame())
                     {
-                        version = Triton.Game.Mapping.Version.version;
-                        clientChangelist = Triton.Game.Mapping.Version.clientChangelist;
+                        version = Version.version;
+                        clientChangelist = Version.clientChangelist;
                     }
                     if ((long)version != (long)((ulong)Class247.UInt32_1) && (long)clientChangelist != (long)((ulong)Class247.UInt32_2))
                     {

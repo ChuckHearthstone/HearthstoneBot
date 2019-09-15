@@ -56,6 +56,31 @@ namespace HearthstoneBot
             return !string.IsNullOrEmpty(String_2);
         }
 
+        public r0 method_6()
+        {
+            if (!this.method_4())
+            {
+                return new r0
+                {
+                    Success = false,
+                    Body = "Invalid Session"
+                };
+            }
+            d0 d = this.method_3(Enum4.Logout, new object[]
+            {
+                this.String_2
+            });
+            if (!string.IsNullOrEmpty(d.Body) && d.Body == "TRIPWIRE")
+            {
+                EventHandler eventHandler = Class40.eventHandler_1;
+                if (eventHandler != null)
+                {
+                    eventHandler(null, null);
+                }
+            }
+            return d;
+        }
+
         public d0 method_7(string string_4, string string_5, bool bool_0 = false)
         {
             if (!method_4())

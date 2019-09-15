@@ -226,5 +226,172 @@ namespace HearthstoneBot
         {
             return method_17<IntPtr>(intptr_29, Array.Empty<object>());
         }
+
+        internal IntPtr method_22(IntPtr intptr_37, IntPtr intptr_38)
+        {
+            IntPtr intPtr = this.method_27();
+            return this.method_17<IntPtr>(this.intptr_11, new object[]
+            {
+                intPtr,
+                intptr_38,
+                intptr_37
+            });
+        }
+
+        internal IntPtr method_26(IntPtr intptr_37)
+        {
+            return this.method_17<IntPtr>(this.intptr_22, new object[]
+            {
+                intptr_37
+            });
+        }
+
+        internal IntPtr method_27()
+        {
+            return this.method_17<IntPtr>(this.intptr_9, Array.Empty<object>());
+        }
+
+        internal Dictionary<string, IntPtr> method_20(string string_0, ref Dictionary<string, IntPtr> dictionary_1)
+        {
+            Dictionary<string, IntPtr> dictionary = new Dictionary<string, IntPtr>();
+            IntPtr value = this.method_29();
+            IntPtr intPtr = this.method_30();
+            //value != intPtr;
+            if (intPtr == IntPtr.Zero)
+            {
+                throw new Exception("Code is not running on a mono thread!");
+            }
+            int num;
+            IntPtr intptr_ = this.method_40(string_0, out num);
+            this.method_16(intptr_, "Could not load assembly. Status: " + num);
+            IntPtr intptr_2 = this.method_39(intptr_);
+            this.method_16(intptr_2, "Could not open mono image. Status: " + num);
+            foreach (IntPtr intPtr2 in this.method_44(intptr_2))
+            {
+                if (intPtr2 != IntPtr.Zero)
+                {
+                    this.externalProcessMemory_0.Read<Struct111>(intPtr2);
+                    IntPtr intPtr3 = this.method_14(intPtr2);
+                    string text = this.method_45(intPtr2);
+                    if (intPtr3 != IntPtr.Zero)
+                    {
+                        text = this.method_44(intPtr3) + "." + text;
+                    }
+                    string text2 = this.method_46(intPtr2);
+                    if (!dictionary.ContainsKey(string.Concat(new string[]
+                    {
+                        string_0,
+                        "~",
+                        text2,
+                        ".",
+                        text
+                    })))
+                    {
+                        string key = string.Concat(new string[]
+                        {
+                            string_0,
+                            "~",
+                            text2,
+                            ".",
+                            text
+                        });
+                        dictionary.Add(key, intPtr2);
+                        dictionary_1.Add(key, this.method_12(intPtr2));
+                    }
+                }
+            }
+            return dictionary;
+        }
+
+        internal IntPtr method_29()
+        {
+            return this.method_17<IntPtr>(this.intptr_33, Array.Empty<object>());
+        }
+
+        internal IntPtr method_30()
+        {
+            return this.method_17<IntPtr>(this.intptr_27, Array.Empty<object>());
+        }
+
+        internal IntPtr method_39(IntPtr intptr_37)
+        {
+            return this.method_17<IntPtr>(this.intptr_4, new object[]
+            {
+                intptr_37
+            });
+        }
+
+        internal IntPtr method_40(string string_0, out int int_0)
+        {
+            IntPtr result;
+            using (AllocatedMemory allocatedMemory = this.externalProcessMemory_0.CreateAllocatedMemory(string_0.Length * 2 + 2 + 4))
+            {
+                allocatedMemory.WriteString(4, string_0, Encoding.UTF8);
+                IntPtr intPtr = this.method_17<IntPtr>(this.intptr_6, new object[]
+                {
+                    allocatedMemory.Address + 4,
+                    allocatedMemory.Address
+                });
+                int_0 = allocatedMemory.Read<int>(0);
+                result = intPtr;
+            }
+            return result;
+        }
+
+        private void method_16(IntPtr intptr_37, string string_0)
+        {
+            if (intptr_37 == IntPtr.Zero)
+            {
+                throw new Exception(string_0);
+            }
+        }
+
+        internal IEnumerable<IntPtr> method_44(IntPtr intptr_37)
+        {
+            Class277 @class = new Class277(-2);
+            @class.class276_0 = this;
+            @class.intptr_2 = intptr_37;
+            return @class;
+        }
+
+        internal IntPtr method_14(IntPtr intptr_37)
+        {
+            return this.method_17<IntPtr>(this.intptr_20, new object[]
+            {
+                intptr_37
+            });
+        }
+
+        internal string method_45(IntPtr intptr_37)
+        {
+            IntPtr intPtr = this.method_14(intptr_37);
+            string text = "";
+            while (intPtr != IntPtr.Zero)
+            {
+                text = this.method_45(intPtr) + "." + text;
+                intPtr = this.method_14(intPtr);
+            }
+            return text + this.externalProcessMemory_0.ReadStringA(this.method_17<IntPtr>(this.intptr_2, new object[]
+            {
+                intptr_37
+            }));
+        }
+
+        internal string method_46(IntPtr intptr_37)
+        {
+            return this.externalProcessMemory_0.ReadStringA(this.method_17<IntPtr>(this.intptr_3, new object[]
+            {
+                intptr_37
+            }));
+        }
+
+        internal IntPtr method_12(IntPtr intptr_37)
+        {
+            return this.method_17<IntPtr>(this.intptr_16, new object[]
+            {
+                intptr_37
+            });
+        }
+
     }
 }

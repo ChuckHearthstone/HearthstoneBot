@@ -1,4 +1,6 @@
-﻿namespace HearthstoneBot
+﻿using System;
+
+namespace HearthstoneBot
 {
     class Class12
     {
@@ -15,6 +17,17 @@
                 return array2;
             }
             return null;
+        }
+
+        internal static void smethod_0()
+        {
+            try
+            {
+                Class45.smethod_2<r0>(new Func<Class40, r0>(Class13.ChuckInstance9.method_0));
+            }
+            catch
+            {
+            }
         }
     }
 }

@@ -34,6 +34,14 @@ namespace HearthstoneBot
 
         internal static bool bool_0 = true;
 
+        internal static Class276 Class276_0
+        {
+            get
+            {
+                return TritonHs.class276_0;
+            }
+        }
+
         internal static bool smethod_0(Process process_0, Delegate6 delegate6_0, out string string_0)
         {
             if (Initialized)

@@ -77,7 +77,15 @@ namespace HearthstoneBot
         {
             get
             {
-                return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                var entryAssembly = Assembly.GetEntryAssembly();
+                if (entryAssembly == null)
+                {
+                    throw new Exception("Can not find entry assembly");
+                }
+                else
+                {
+                    return Path.GetDirectoryName(entryAssembly.Location);
+                }
             }
         }
 
@@ -132,6 +140,7 @@ namespace HearthstoneBot
             }
             catch (Exception arg)
             {
+                Console.WriteLine(arg);
                 //BotManager.ilog_0.ErrorFormat("[Load] An exception occurred: {0}.", arg);
             }
             return false;

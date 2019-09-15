@@ -147,7 +147,12 @@ namespace HearthstoneBot
         }
         private void method_24()
         {
-            foreach (IBot object_ in BotManager.Bots)
+            var bots = BotManager.Bots;
+            if (bots == null)
+            {
+                return;
+            }
+            foreach (IBot object_ in bots)
             {
                 this.method_2(object_);
             }
@@ -236,7 +241,12 @@ namespace HearthstoneBot
 
         private void method_26()
         {
-            foreach (IRoutine object_ in RoutineManager.Routines)
+            var routines = RoutineManager.Routines;
+            if (routines == null)
+            {
+                return;
+            }
+            foreach (IRoutine object_ in routines)
             {
                 this.method_2(object_);
             }

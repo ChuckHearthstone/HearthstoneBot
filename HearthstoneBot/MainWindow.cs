@@ -70,7 +70,8 @@ namespace HearthstoneBot
                     {
                         Console.WriteLine("Hearthstone client version ({0}, {1})", version, clientChangelist);
                         //MainWindow.ilog_0.InfoFormat("Hearthstone client version ({0}, {1})", version, clientChangelist);
-                        new Coroutine(new Func<Task>(Class25.Instance.method_2));
+                        //new Coroutine(new Func<Task>(Class25.Instance.method_2));
+                        smethod_0();
                         //Configuration.Instance.AddSettings(MainSettings.Instance);
                         //Configuration.Instance.AddSettings(DevSettings.Instance);
                         //Configuration.Instance.SaveAll();

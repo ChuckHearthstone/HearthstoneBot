@@ -94,5 +94,14 @@ namespace HearthstoneBot
                     return "eax";
             }
         }
+
+        internal static void smethod_4(this ManagedFasm managedFasm_0, string string_0, params object[] object_0)
+        {
+            int num = random_0.Next(2, 5);
+            int num2 = num / 2;
+            smethod_2(managedFasm_0, num2);
+            managedFasm_0.AddLine(string_0, object_0);
+            smethod_2(managedFasm_0, num % 2 + num2);
+        }
     }
 }

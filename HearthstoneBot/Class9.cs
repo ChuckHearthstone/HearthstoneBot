@@ -40,13 +40,14 @@ namespace HearthstoneBot
             return false;
         }
 
-        internal static bool smethod_5(string processName,out Mutex mutex_0, out Process process_0)
+        internal static bool smethod_5(out Mutex mutex_0, out Process process_0)
         {
             mutex_0 = null;
             process_0 = null;
             bool result;
             try
             {
+                var processName = ConstsHelper.ProcessName;
                 process_0 = Process.GetProcessesByName(processName).FirstOrDefault();
                 if (process_0 != null && smethod_6(process_0))
                 {
@@ -80,5 +81,16 @@ namespace HearthstoneBot
             return result;
         }
 
+        internal static bool smethod_4(out Mutex mutex_0, out Process process_0)
+        {
+            if (!smethod_5(out mutex_0, out process_0))
+            {
+                return false;
+            }
+
+            var processFolder = Path.GetDirectoryName(process_0.MainModule.FileName);
+            Path.Combine(processFolder, "Hearthstone_Data", "Mono");
+            return true;
+        }
     }
 }

@@ -9,13 +9,13 @@ namespace HearthstoneBot
 {
     class Class276
     {
-        private readonly ExternalProcessMemory externalProcessMemory_0;
+        internal readonly ExternalProcessMemory externalProcessMemory_0;
 
         private readonly Dictionary<Type, IntPtr> dictionary_0 = new Dictionary<Type, IntPtr>();
 
         private readonly IntPtr intptr_0;
 
-        private readonly IntPtr intptr_1;
+        internal readonly IntPtr intptr_1;
 
         // Token: 0x04000D4D RID: 3405
         private readonly IntPtr intptr_2;
@@ -54,7 +54,7 @@ namespace HearthstoneBot
         private readonly IntPtr intptr_13;
 
         // Token: 0x04000D59 RID: 3417
-        private readonly IntPtr intptr_14;
+        internal readonly IntPtr intptr_14;
 
         // Token: 0x04000D5A RID: 3418
         private readonly IntPtr intptr_15;
@@ -199,7 +199,7 @@ namespace HearthstoneBot
             dictionary_0.Add(typeof(T), ptr2);
         }
 
-        private T method_17<T>(IntPtr intptr_37, params object[] object_0) where T : struct
+        internal T method_17<T>(IntPtr intptr_37, params object[] object_0) where T : struct
         {
             return externalProcessMemory_0.CallInjected<T>(intptr_37, CallingConvention.Cdecl, object_0);
         }

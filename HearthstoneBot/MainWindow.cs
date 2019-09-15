@@ -50,6 +50,7 @@ namespace HearthstoneBot
                 }
                 else if (!TritonHs.smethod_0(this.process_0, Class12.smethod_4, out text))
                 {
+                    Console.WriteLine(text);
                     MessageBox.Show("TritonHs.smethod_0 == false");
                 }
                 else
@@ -140,6 +141,7 @@ namespace HearthstoneBot
             }
             catch (Exception exception)
             {
+                Console.WriteLine(exception);
                 //MainWindow.ilog_0.Error("[OnStartup] A top-level exception has been caught.", exception);
             }
         }

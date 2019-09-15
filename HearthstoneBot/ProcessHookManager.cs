@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Fasm;
@@ -415,6 +416,69 @@ namespace HearthstoneBot
                 {
                     allocatedMemory_0.Dispose();
                     allocatedMemory_0 = null;
+                }
+            }
+        }
+
+        private static void smethod_2()
+        {
+            var list = smethod_0();
+            if (list.Any(Class244.Instance.method_1))
+            {
+                return;
+            }
+            var @class = new Class243
+            {
+                int_0 = ExternalProcessMemory_0.Process.Id,
+                list_0 = new List<byte[]>()
+            };
+            ExternalProcessMemory externalProcessMemory_ = ExternalProcessMemory_0;
+            using (TritonHs.AcquireFrame())
+            {
+                @class.list_0.Add(externalProcessMemory_.Patches["ProcessHookManager_GetForegroundWindow"].OriginalBytes);
+                @class.list_0.Add(externalProcessMemory_.Patches["ProcessHookManager_GetActiveWindow"].OriginalBytes);
+                @class.list_0.Add(externalProcessMemory_.Patches["ProcessHookManager_GetKeyState"].OriginalBytes);
+                @class.list_0.Add(externalProcessMemory_.Patches["ProcessHookManager_GetCursorPos"].OriginalBytes);
+                @class.list_0.Add(externalProcessMemory_.Patches["ProcessHookManager_ScreenToClient"].OriginalBytes);
+            }
+            list.Add(@class);
+            foreach (Class243 class2 in list.ToArray())
+            {
+                try
+                {
+                    Process processById = Process.GetProcessById(class2.int_0);
+                    try
+                    {
+                        if (!processById.ProcessName.ToLowerInvariant().Contains("hearthstone"))
+                        {
+                            list.Remove(class2);
+                        }
+                    }
+                    catch
+                    {
+                        list.Remove(class2);
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    list.Remove(class2);
+                }
+            }
+            using (FileStream fileStream = File.Create(ProcessHookManager.String_0))
+            {
+                using (BinaryWriter binaryWriter = new BinaryWriter(fileStream))
+                {
+                    binaryWriter.Write(list.Count);
+                    foreach (Class243 class3 in list)
+                    {
+                        binaryWriter.Write(class3.int_0);
+                        binaryWriter.Write(class3.list_0.Count);
+                        foreach (byte[] array2 in class3.list_0)
+                        {
+                            binaryWriter.Write(array2.Length);
+                            binaryWriter.Write(array2);
+                        }
+                    }
                 }
             }
         }

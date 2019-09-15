@@ -4,7 +4,7 @@ using System.IO;
 using GreyMagic;
 using HearthstoneBot.Common;
 
-namespace HearthstoneBot
+namespace HearthstoneBot.Game
 {
     class TritonHs
     {

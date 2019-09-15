@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace HearthstoneBot
+namespace HearthstoneBot.Auth
 {
     public class r0
     {

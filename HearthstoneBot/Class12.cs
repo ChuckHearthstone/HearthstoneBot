@@ -1,4 +1,5 @@
 ﻿using System;
+using HearthstoneBot.Auth;
 
 namespace HearthstoneBot
 {

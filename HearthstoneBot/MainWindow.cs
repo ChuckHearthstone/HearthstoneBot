@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using HearthstoneBot.Bot;
 using HearthstoneBot.Common;
+using HearthstoneBot.Game;
 using log4net.Plugin;
 using Version = HearthstoneBot.Mapping.Version;
 

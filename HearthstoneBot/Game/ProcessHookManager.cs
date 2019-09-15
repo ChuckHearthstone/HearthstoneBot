@@ -6,7 +6,7 @@ using System.Linq;
 using Fasm;
 using GreyMagic;
 
-namespace HearthstoneBot
+namespace HearthstoneBot.Game
 {
     public enum StateEnum
     {

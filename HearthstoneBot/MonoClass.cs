@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GreyMagic;
+using HearthstoneBot.Game;
 
 namespace HearthstoneBot
 {

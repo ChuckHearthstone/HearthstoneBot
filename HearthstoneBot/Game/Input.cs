@@ -1,4 +1,4 @@
-﻿namespace HearthstoneBot
+﻿namespace HearthstoneBot.Game
 {
     class Input
     {

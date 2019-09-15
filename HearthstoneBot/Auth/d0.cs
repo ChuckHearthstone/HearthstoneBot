@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HearthstoneBot
+﻿namespace HearthstoneBot.Auth
 {
     public class d0 : r0
     {

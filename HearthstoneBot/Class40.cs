@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
 using System.Text;
+using HearthstoneBot.Auth;
 using HearthstoneBot.Enums;
 
 namespace HearthstoneBot

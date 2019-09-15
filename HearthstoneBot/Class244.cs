@@ -1,4 +1,6 @@
-﻿namespace HearthstoneBot
+﻿using HearthstoneBot.Game;
+
+namespace HearthstoneBot
 {
     class Class244
     {

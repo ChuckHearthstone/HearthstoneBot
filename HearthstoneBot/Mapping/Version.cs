@@ -1,4 +1,6 @@
-﻿namespace HearthstoneBot.Mapping
+﻿using HearthstoneBot.Game;
+
+namespace HearthstoneBot.Mapping
 {
     class Version : MonoClass
     {

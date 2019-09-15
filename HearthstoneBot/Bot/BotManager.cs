@@ -5,8 +5,9 @@ using System.Reflection;
 using System.Threading;
 using GreyMagic;
 using HearthstoneBot.Common;
+using HearthstoneBot.Game;
 
-namespace HearthstoneBot
+namespace HearthstoneBot.Bot
 {
     public interface IRunnable
     {

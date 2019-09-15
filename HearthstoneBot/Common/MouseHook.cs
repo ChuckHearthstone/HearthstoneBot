@@ -1,9 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
-using HearthstoneBot.Common;
 
-namespace HearthstoneBot
+namespace HearthstoneBot.Common
 {
     class MouseHook
     {

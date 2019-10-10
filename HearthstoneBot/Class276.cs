@@ -179,14 +179,19 @@ namespace HearthstoneBot
             method_15<Enum>("enum");
         }
 
-        internal IntPtr method_18(string string_0)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="libraryName">mono.dll</param>
+        /// <returns></returns>
+        internal IntPtr method_18(string libraryName)
         {
             IntPtr procAddress = externalProcessMemory_0.GetProcAddress("kernel32.dll", "GetModuleHandleW");
             IntPtr result;
-            var length = string_0.Length * 2 + 2;
+            var length = libraryName.Length * 2 + 2;
             using (AllocatedMemory allocatedMemory = externalProcessMemory_0.CreateAllocatedMemory(length))
             {
-                allocatedMemory.WriteString(0, string_0, Encoding.Unicode);
+                allocatedMemory.WriteString(0, libraryName, Encoding.Unicode);
                 result = externalProcessMemory_0.CallInjected<IntPtr>(procAddress, CallingConvention.StdCall, allocatedMemory.Address);
             }
             return result;

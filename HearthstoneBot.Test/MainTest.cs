@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace HearthstoneBot.Test
 {
@@ -8,9 +9,15 @@ namespace HearthstoneBot.Test
         [Test]
         public void Test()
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.method_21(null);
-            
+            try
+            {
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.method_21(null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
     }

@@ -19,7 +19,9 @@ namespace HearthstoneBotApp
         {
             if (BotManager.CurrentBot == null)
             {
-                BotManager.CurrentBot = new DefaultBot();
+                var bot=new DefaultBot();
+                BotManager.Bots.Add(bot);
+                BotManager.CurrentBot = bot;
             }
 
             if (BotManager.IsRunning)
@@ -28,7 +30,11 @@ namespace HearthstoneBotApp
             }
             else
             {
-                BotManager.Start();
+                bool success = BotManager.Start();
+                if (!success)
+                {
+                    MessageBox.Show($@"Start failed.");
+                }
             }
         }
 

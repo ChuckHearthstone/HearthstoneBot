@@ -100,6 +100,8 @@
     <Compile Include="Class247.cs" />
     <Compile Include="Class248.cs" />
     <Compile Include="Class25.cs" />
+    <Compile Include="Class273.cs" />
+    <Compile Include="Class274.cs" />
     <Compile Include="Class276.cs" />
     <Compile Include="Class277.cs" />
     <Compile Include="Class40.cs" />

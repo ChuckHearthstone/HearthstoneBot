@@ -1,9 +1,19 @@
-﻿using HearthstoneBot.Game;
+﻿using System;
+using HearthstoneBot.Game;
 
 namespace HearthstoneBot.Mapping
 {
     class Version : MonoClass
     {
+        public Version(IntPtr address, string className) : base(address, className)
+        {
+        }
+
+        // Token: 0x0600969C RID: 38556 RVA: 0x0007F31C File Offset: 0x0007D51C
+        public Version(IntPtr address) : this(address, "Version")
+        {
+        }
+
         public static int version
         {
             get

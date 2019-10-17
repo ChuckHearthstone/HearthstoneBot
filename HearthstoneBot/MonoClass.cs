@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GreyMagic;
 using HearthstoneBot.Common;
 using HearthstoneBot.Enums;
@@ -7,7 +8,7 @@ using HearthstoneBot.Game;
 
 namespace HearthstoneBot
 {
-    public class MonoClass
+    public partial class MonoClass
     {
         internal static ExternalProcessMemory ExternalProcessMemory_0
         {
@@ -117,7 +118,7 @@ namespace HearthstoneBot
         private static readonly Dictionary<IntPtr, Dictionary<string, List<MonoClass.Class273>>> dictionary_3 = new Dictionary<IntPtr, Dictionary<string, List<MonoClass.Class273>>>();
         private static IntPtr smethod_4(IntPtr intptr_1, string string_4, Enum20[] enum20_0)
         {
-            MonoClass.Class274 @class = new MonoClass.Class274();
+            Class274 @class = new Class274();
             @class.string_0 = string_4;
             @class.enum20_0 = enum20_0;
             Dictionary<string, List<MonoClass.Class273>> dictionary;

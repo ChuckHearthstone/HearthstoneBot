@@ -288,5 +288,44 @@ namespace HearthstoneBot
                 MonoClass.list_0.Clear();
             }
         }
+
+        internal static T smethod_15<T>(string string_4, string string_5, string string_6, string string_7, params object[] object_0) where T : MonoClass
+        {
+            return MonoClass.smethod_16<T>(string_4, string_5, string_6, string_7, null, object_0);
+        }
+
+        internal static T smethod_16<T>(string string_4, string string_5, string string_6, string string_7, Enum20[] enum20_0, params object[] object_0) where T : MonoClass
+        {
+            IntPtr intPtr = MonoClass.smethod_10(string_4, string_5, string_6, string_7, enum20_0, object_0);
+            if (intPtr == IntPtr.Zero)
+            {
+                return default(T);
+            }
+            return FastObjectFactory.CreateObjectInstance<T>(intPtr);
+        }
+
+        internal static IntPtr smethod_10(string string_4, string string_5, string string_6, string string_7, Enum20[] enum20_0, params object[] object_0)
+        {
+            string key = string.Concat(new string[]
+            {
+                string_4,
+                "~",
+                string_5,
+                ".",
+                string_6
+            });
+            IntPtr intPtr;
+            if (!MonoClass.Dictionary_1.TryGetValue(key, out intPtr))
+            {
+                intPtr = MonoClass.Class276_0.method_21(string_4, string_5, string_6);
+                MonoClass.Dictionary_1.Add(key, intPtr);
+            }
+            IntPtr intPtr2 = MonoClass.smethod_4(intPtr, string_7, enum20_0);
+            if (intPtr2 == IntPtr.Zero)
+            {
+                return IntPtr.Zero;
+            }
+            return MonoClass.Class276_0.method_43(intPtr2, IntPtr.Zero, object_0);
+        }
     }
 }

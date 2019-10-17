@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using GreyMagic;
 using HearthstoneBot.Common;
+using HearthstoneBot.Mapping;
 
 namespace HearthstoneBot.Game
 {
-    class TritonHs
+    public class TritonHs
     {
         private static ExternalProcessMemory externalProcessMemory_0;
 
@@ -197,6 +199,45 @@ namespace HearthstoneBot.Game
             {
                 //TritonHs.ilog_0.Error("[CollectGarbage] Exception during execution:", exception);
             }
+        }
+
+        public static bool Concede(bool logReason)
+        {
+            bool result;
+            try
+            {
+                if (GameState.Get() == null)
+                {
+                    if (logReason)
+                    {
+                        //TritonHs.ilog_0.InfoFormat("[Concede] GameState == null.", Array.Empty<object>());
+                    }
+                    result = false;
+                }
+                //else if (!GameUtils.CanConcedeCurrentMission())
+                //{
+                //    TritonHs.ilog_0.InfoFormat("[Concede] !GameUtils.CanConcedeCurrentMission().", Array.Empty<object>());
+                //    result = false;
+                //}
+                else
+                {
+                    GameState.Get().Concede();
+                    using (TritonHs.Memory.ReleaseFrame(true))
+                    {
+                        Thread.Sleep(1000);
+                    }
+                    result = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (logReason)
+                {
+                    //TritonHs.ilog_0.InfoFormat("[Concede] An exception occurred. {0}", ex.ToString());
+                }
+                result = false;
+            }
+            return result;
         }
     }
 }

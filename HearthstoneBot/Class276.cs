@@ -18,12 +18,21 @@ namespace HearthstoneBot
         /// </summary>
         private readonly IntPtr intptr_0;
 
+        /// <summary>
+        /// mono_class_get
+        /// </summary>
         internal readonly IntPtr intptr_1;
 
         // Token: 0x04000D4D RID: 3405
+        /// <summary>
+        /// mono_class_get_name
+        /// </summary>
         private readonly IntPtr intptr_2;
 
         // Token: 0x04000D4E RID: 3406
+        /// <summary>
+        /// mono_class_get_namespace
+        /// </summary>
         private readonly IntPtr intptr_3;
 
         // Token: 0x04000D4F RID: 3407
@@ -45,6 +54,9 @@ namespace HearthstoneBot
         private readonly IntPtr intptr_7;
 
         // Token: 0x04000D53 RID: 3411
+        /// <summary>
+        /// mono_class_get_fields
+        /// </summary>
         private readonly IntPtr intptr_8;
 
         // Token: 0x04000D54 RID: 3412
@@ -54,6 +66,9 @@ namespace HearthstoneBot
         private readonly IntPtr intptr_9;
 
         // Token: 0x04000D55 RID: 3413
+        /// <summary>
+        /// mono_gchandle_free
+        /// </summary>
         private readonly IntPtr intptr_10;
 
         // Token: 0x04000D56 RID: 3414
@@ -69,12 +84,18 @@ namespace HearthstoneBot
         private readonly IntPtr intptr_13;
 
         // Token: 0x04000D59 RID: 3417
+        /// <summary>
+        /// mono_image_get_table_rows
+        /// </summary>
         internal readonly IntPtr intptr_14;
 
         // Token: 0x04000D5A RID: 3418
         private readonly IntPtr intptr_15;
 
         // Token: 0x04000D5B RID: 3419
+        /// <summary>
+        /// mono_class_get_type
+        /// </summary>
         private readonly IntPtr intptr_16;
 
         // Token: 0x04000D5C RID: 3420
@@ -87,6 +108,9 @@ namespace HearthstoneBot
         private readonly IntPtr intptr_19;
 
         // Token: 0x04000D5F RID: 3423
+        /// <summary>
+        /// mono_class_get_nesting_type
+        /// </summary>
         private readonly IntPtr intptr_20;
 
         // Token: 0x04000D60 RID: 3424
@@ -117,6 +141,9 @@ namespace HearthstoneBot
         private readonly IntPtr intptr_27;
 
         // Token: 0x04000D67 RID: 3431
+        /// <summary>
+        /// mono_class_get_parent
+        /// </summary>
         private readonly IntPtr intptr_28;
 
         // Token: 0x04000D68 RID: 3432
@@ -126,6 +153,12 @@ namespace HearthstoneBot
         private readonly IntPtr intptr_29;
 
         // Token: 0x04000D69 RID: 3433
+        /// <summary>
+        /// 16635 - mono_event_get_name
+        /// 16635 - mono_field_get_name
+        /// 16635 - mono_method_get_token
+        /// 16635 - mono_property_get_name
+        /// </summary>
         private readonly IntPtr intptr_30;
 
         // Token: 0x04000D6A RID: 3434
@@ -331,18 +364,19 @@ namespace HearthstoneBot
             this.method_16(intptr_, "Could not load assembly. Status: " + num);
             IntPtr intptr_2 = this.method_39(intptr_);
             this.method_16(intptr_2, "Could not open mono image. Status: " + num);
-            foreach (IntPtr intPtr2 in this.method_44(intptr_2))
+            var class277 = method_44(intptr_2);
+            foreach (IntPtr intPtr2 in class277)
             {
                 if (intPtr2 != IntPtr.Zero)
                 {
                     this.externalProcessMemory_0.Read<Struct111>(intPtr2);
-                    IntPtr intPtr3 = this.method_14(intPtr2);
-                    string text = this.method_45(intPtr2);
+                    IntPtr intPtr3 = this.method_14(intPtr2);//mono_class_get_nesting_type
+                    string text = this.method_45(intPtr2);//mono_class_get_name
                     if (intPtr3 != IntPtr.Zero)
                     {
                         text = this.method_44(intPtr3) + "." + text;
                     }
-                    string text2 = this.method_46(intPtr2);
+                    string text2 = this.method_46(intPtr2);//mono_class_get_namespace
                     if (!dictionary.ContainsKey(string.Concat(new string[]
                     {
                         string_0,
@@ -374,7 +408,7 @@ namespace HearthstoneBot
         /// <returns></returns>
         internal IntPtr method_29()
         {
-            return this.method_17<IntPtr>(this.intptr_33, Array.Empty<object>());
+            return this.method_17<IntPtr>(this.intptr_33, Array.Empty<object>());//mono_thread_get_main
         }
 
         /// <summary>
@@ -383,7 +417,7 @@ namespace HearthstoneBot
         /// <returns></returns>
         internal IntPtr method_30()
         {
-            return this.method_17<IntPtr>(this.intptr_27, Array.Empty<object>());
+            return this.method_17<IntPtr>(this.intptr_27, Array.Empty<object>());//mono_thread_current
         }
 
         /// <summary>
@@ -393,12 +427,19 @@ namespace HearthstoneBot
         /// <returns></returns>
         internal IntPtr method_39(IntPtr intptr_37)
         {
-            return this.method_17<IntPtr>(this.intptr_4, new object[]
+            return this.method_17<IntPtr>(this.intptr_4,//mono_assembly_get_image
+                new object[]
             {
                 intptr_37
             });
         }
 
+        /// <summary>
+        /// mono_assembly_open
+        /// </summary>
+        /// <param name="string_0"></param>
+        /// <param name="int_0"></param>
+        /// <returns></returns>
         internal IntPtr method_40(string string_0, out int int_0)
         {
             IntPtr result;
@@ -433,43 +474,70 @@ namespace HearthstoneBot
             return @class;
         }
 
+        /// <summary>
+        /// mono_class_get_nesting_type
+        /// </summary>
+        /// <param name="intptr_37"></param>
+        /// <returns></returns>
         internal IntPtr method_14(IntPtr intptr_37)
         {
-            return this.method_17<IntPtr>(this.intptr_20, new object[]
+            return this.method_17<IntPtr>(this.intptr_20,//mono_class_get_nesting_type
+                new object[]
             {
                 intptr_37
             });
         }
 
+        /// <summary>
+        /// mono_class_get_name
+        /// </summary>
+        /// <param name="intptr_37"></param>
+        /// <returns></returns>
         internal string method_45(IntPtr intptr_37)
         {
-            IntPtr intPtr = this.method_14(intptr_37);
+            IntPtr intPtr = this.method_14(intptr_37);//mono_class_get_nesting_type
             string text = "";
             while (intPtr != IntPtr.Zero)
             {
                 text = this.method_45(intPtr) + "." + text;
                 intPtr = this.method_14(intPtr);
             }
-            return text + this.externalProcessMemory_0.ReadStringA(this.method_17<IntPtr>(this.intptr_2, new object[]
-            {
-                intptr_37
-            }));
-        }
 
-        internal string method_46(IntPtr intptr_37)
-        {
-            return this.externalProcessMemory_0.ReadStringA(this.method_17<IntPtr>(this.intptr_3, new object[]
-            {
-                intptr_37
-            }));
-        }
-
-        internal IntPtr method_12(IntPtr intptr_37)
-        {
-            return this.method_17<IntPtr>(this.intptr_16, new object[]
+            var ptr = this.method_17<IntPtr>(this.intptr_2,//mono_class_get_name 
+                new object[]
             {
                 intptr_37
             });
+            return text + this.externalProcessMemory_0.ReadStringA(ptr);
+        }
+
+        /// <summary>
+        /// mono_class_get_namespace
+        /// </summary>
+        /// <param name="intptr_37"></param>
+        /// <returns></returns>
+        internal string method_46(IntPtr intptr_37)
+        {
+            var ptr = this.method_17<IntPtr>(this.intptr_3,//mono_class_get_namespace
+                new object[]
+            {
+                intptr_37
+            });
+            return this.externalProcessMemory_0.ReadStringA(ptr);
+        }
+
+        /// <summary>
+        /// mono_class_get_type
+        /// </summary>
+        /// <param name="intptr_37"></param>
+        /// <returns></returns>
+        internal IntPtr method_12(IntPtr intptr_37)
+        {
+            var array = new object[]
+            {
+                intptr_37
+            };
+            return this.method_17<IntPtr>(this.intptr_16, array);//mono_class_get_type
         }
 
         internal IntPtr method_34(IntPtr intptr_37, string string_0)
@@ -480,7 +548,7 @@ namespace HearthstoneBot
                 {
                     allocatedMemory.AllocateOfChunk<IntPtr>("Itr");
                     IntPtr intPtr;
-                    while ((intPtr = this.method_36(intptr_37, allocatedMemory["Itr"])) != IntPtr.Zero)
+                    while ((intPtr = this.method_36(intptr_37, allocatedMemory["Itr"])) != IntPtr.Zero)//mono_class_get_fields
                     {
                         IntPtr address = this.method_38(intPtr);
                         if (this.externalProcessMemory_0.ReadStringA(address) == string_0)
@@ -494,15 +562,27 @@ namespace HearthstoneBot
             return IntPtr.Zero;
         }
 
+        /// <summary>
+        /// mono_class_get_fields
+        /// </summary>
+        /// <param name="intptr_37"></param>
+        /// <param name="intptr_38"></param>
+        /// <returns></returns>
         internal IntPtr method_36(IntPtr intptr_37, IntPtr intptr_38)
         {
-            return this.method_17<IntPtr>(this.intptr_8, new object[]
+            return this.method_17<IntPtr>(this.intptr_8,//mono_class_get_fields
+                new object[]
             {
                 intptr_37,
                 intptr_38
             });
         }
 
+        /// <summary>
+        /// field(property) get name
+        /// </summary>
+        /// <param name="intptr_37"></param>
+        /// <returns></returns>
         internal IntPtr method_38(IntPtr intptr_37)
         {
             return this.method_17<IntPtr>(this.intptr_30, new object[]
@@ -511,6 +591,11 @@ namespace HearthstoneBot
             });
         }
 
+        /// <summary>
+        /// mono_class_get_parent
+        /// </summary>
+        /// <param name="intptr_37"></param>
+        /// <returns></returns>
         internal IntPtr method_25(IntPtr intptr_37)
         {
             return this.method_17<IntPtr>(this.intptr_28, new object[]
@@ -521,8 +606,8 @@ namespace HearthstoneBot
 
         internal IntPtr method_21(string string_0, string string_1, string string_2)
         {
-            IntPtr value = this.method_29();
-            IntPtr intPtr = this.method_30();
+            IntPtr value = this.method_29();//mono_thread_get_main
+            IntPtr intPtr = this.method_30();//mono_thread_current
             //value != intPtr;
             if (intPtr == IntPtr.Zero)
             {
@@ -540,8 +625,8 @@ namespace HearthstoneBot
                     IntPtr intPtr2 = enumerator.Current;
                     if (intPtr2 != IntPtr.Zero)
                     {
-                        string a = this.method_45(intPtr2);
-                        string a2 = this.method_46(intPtr2);
+                        string a = this.method_45(intPtr2);//get class name
+                        string a2 = this.method_46(intPtr2);//get class namespace
                         if (a == string_2 && a2 == string_1)
                         {
                             return intPtr2;
@@ -553,9 +638,14 @@ namespace HearthstoneBot
             return IntPtr.Zero;
         }
 
+        /// <summary>
+        /// mono_gchandle_free
+        /// </summary>
+        /// <param name="uint_0"></param>
         internal void method_11(uint uint_0)
         {
-            this.method_17<int>(this.intptr_10, new object[]
+            this.method_17<int>(this.intptr_10,//mono_gchandle_free
+                new object[]
             {
                 uint_0
             });

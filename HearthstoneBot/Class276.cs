@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using GreyMagic;
+using HearthstoneBot.Enums;
+using HearthstoneBot.Mapping;
 
 namespace HearthstoneBot
 {
@@ -650,5 +653,280 @@ namespace HearthstoneBot
                 uint_0
             });
         }
+
+        /// <summary>
+        /// mono_gchandle_new
+        /// </summary>
+        /// <param name="intptr_37"></param>
+        /// <param name="bool_0"></param>
+        /// <returns></returns>
+        internal uint method_10(IntPtr intptr_37, bool bool_0)
+        {
+            return this.method_17<uint>(this.intptr_12,//mono_gchandle_new
+                new object[]
+            {
+                intptr_37,
+                bool_0 ? 1 : 0
+            });
+        }
+
+        /// <summary>
+        /// mono_object_get_class
+        /// </summary>
+        /// <param name="intptr_37"></param>
+        /// <returns></returns>
+        internal IntPtr method_23(IntPtr intptr_37)
+        {
+            return this.method_17<IntPtr>(this.intptr_24,//mono_object_get_class
+                new object[]
+            {
+                intptr_37
+            });
+        }
+
+        internal IntPtr method_28(string string_0)
+        {
+            IntPtr result;
+            using (AllocatedMemory allocatedMemory = this.externalProcessMemory_0.CreateAllocatedMemory((string_0.Length + 1) * 2))
+            {
+                if (string_0.Length > 0)
+                {
+                    allocatedMemory.WriteString(0, string_0, Encoding.UTF8);
+                }
+                else
+                {
+                    allocatedMemory.Write<ushort>(0, 0);
+                }
+                IntPtr intPtr = this.method_27();//mono_domain_get
+                result = this.method_17<IntPtr>(this.intptr_25,//mono_string_new
+                    new object[]
+                {
+                    intPtr,
+                    allocatedMemory.Address
+                });
+            }
+            return result;
+        }
+
+        internal IntPtr method_43(IntPtr intptr_37, IntPtr intptr_38, params object[] object_0)
+        {
+            if (object_0 != null && object_0.Length != 0)
+            {
+                IntPtr result;
+                using (AllocatedMemory allocatedMemory = this.externalProcessMemory_0.CreateAllocatedMemory(2048))
+                {
+                    allocatedMemory.AllocateOfChunk("ArrayPtrs", 512);
+                    allocatedMemory.AllocateOfChunk("Args", 512);
+                    int num = 0;
+                    int num2 = 0;
+                    foreach (object obj in object_0)
+                    {
+                        object obj2 = obj;
+                        IntPtr intPtr;
+                        if (MonoClass.IsOutParam(num, out intPtr))
+                        {
+                            obj2 = intPtr;
+                        }
+                        MonoClass monoClass = obj as MonoClass;
+                        if (monoClass != null)
+                        {
+                            obj2 = monoClass.GetClassInstance();
+                        }
+                        else if (obj != null)
+                        {
+                            string text = obj as string;
+                            if (text != null)
+                            {
+                                obj2 = this.method_28(text);
+                            }
+                            else if (obj.GetType().IsEnum)
+                            {
+                                obj2 = Convert.ChangeType(obj2, ((Enum)obj2).GetTypeCode());
+                            }
+                        }
+                        else
+                        {
+                            obj2 = IntPtr.Zero;
+                        }
+                        int num3 = 4;
+                        if (!(obj2 is IntPtr))
+                        {
+                            if (obj2 is long)
+                            {
+                                allocatedMemory.Write<long>("Args", num2, (long)obj2);
+                                num3 = 8;
+                            }
+                            else if (obj2 is ulong)
+                            {
+                                allocatedMemory.Write<ulong>("Args", num2, (ulong)obj2);
+                                num3 = 8;
+                            }
+                            else if (obj2 is uint)
+                            {
+                                allocatedMemory.Write<uint>("Args", num2, (uint)obj2);
+                            }
+                            else if (obj2 is int)
+                            {
+                                allocatedMemory.Write<int>("Args", num2, (int)obj2);
+                            }
+                            else if (obj2 is bool)
+                            {
+                                allocatedMemory.Write<int>("Args", num2, ((bool)obj2) ? 1 : 0);
+                            }
+                            else if (obj2 is double)
+                            {
+                                allocatedMemory.Write<double>("Args", num2, (double)obj2);
+                                num3 = 8;
+                            }
+                            else if (obj2 is float)
+                            {
+                                allocatedMemory.Write<float>("Args", num2, (float)obj2);
+                            }
+                            else if (obj2 is Vector3)
+                            {
+                                Vector3 vector = (Vector3)obj2;
+                                allocatedMemory.Write<float>("Args", num2 + 0, vector.X);
+                                allocatedMemory.Write<float>("Args", num2 + 4, vector.Y);
+                                allocatedMemory.Write<float>("Args", num2 + 8, vector.Z);
+                                num3 = 12;
+                            }
+                            else
+                            {
+                                if (!(obj2 is RaycastHit))
+                                {
+                                    throw new Exception("Unknown type passed as argument: " + obj2.GetType());
+                                }
+                                RaycastHit raycastHit = (RaycastHit)obj2;
+                                allocatedMemory.Write<float>("Args", num2 + 0, raycastHit.Point.X);
+                                allocatedMemory.Write<float>("Args", num2 + 4, raycastHit.Point.Y);
+                                allocatedMemory.Write<float>("Args", num2 + 8, raycastHit.Point.Z);
+                                allocatedMemory.Write<float>("Args", num2 + 12, raycastHit.Normal.X);
+                                allocatedMemory.Write<float>("Args", num2 + 16, raycastHit.Normal.Y);
+                                allocatedMemory.Write<float>("Args", num2 + 20, raycastHit.Normal.Z);
+                                allocatedMemory.Write<int>("Args", num2 + 24, raycastHit.FaceID);
+                                allocatedMemory.Write<float>("Args", num2 + 28, raycastHit.Distance);
+                                allocatedMemory.Write<float>("Args", num2 + 32, raycastHit.UV.X);
+                                allocatedMemory.Write<float>("Args", num2 + 36, raycastHit.UV.Y);
+                                num3 = 40;
+                            }
+                        }
+                        if (obj2 is IntPtr)
+                        {
+                            allocatedMemory.Write<IntPtr>("ArrayPtrs", 4 * num, (IntPtr)obj2);
+                        }
+                        else
+                        {
+                            allocatedMemory.Write<IntPtr>("ArrayPtrs", 4 * num, allocatedMemory["Args"] + num2);
+                        }
+                        num++;
+                        num2 += num3;
+                    }
+                    result = this.method_17<IntPtr>(this.intptr_26, new object[]
+                    {
+                        intptr_37,
+                        intptr_38,
+                        allocatedMemory["ArrayPtrs"],
+                        IntPtr.Zero
+                    });
+                }
+                return result;
+            }
+            return this.method_17<IntPtr>(this.intptr_26, new object[]
+            {
+                intptr_37,
+                intptr_38,
+                IntPtr.Zero,
+                IntPtr.Zero
+            });
+        }
+
+        /// <summary>
+        /// mono_class_get_methods
+        /// </summary>
+        /// <param name="intptr_37"></param>
+        /// <param name="intptr_38"></param>
+        /// <returns></returns>
+        internal IntPtr method_35(IntPtr intptr_37, IntPtr intptr_38)
+        {
+            return this.method_17<IntPtr>(this.intptr_19,//mono_class_get_methods
+                new object[]
+            {
+                intptr_37,
+                intptr_38
+            });
+        }
+
+        /// <summary>
+        /// 3875D - mono_event_get_raise_method
+        /// 3875D - mono_jit_info_get_code_size
+        /// 3875D - mono_method_get_name
+        /// 3875D - mono_property_get_flags
+        /// </summary>
+        /// <param name="intptr_37"></param>
+        /// <returns></returns>
+        internal IntPtr method_37(IntPtr intptr_37)
+        {
+            return this.method_17<IntPtr>(this.intptr_21,//mono_method_get_name
+                new object[]
+            {
+                intptr_37
+            });
+        }
+
+        internal IntPtr method_13(IntPtr intptr_37)
+        {
+            return this.method_17<IntPtr>(this.intptr_15,//mono_method_signature
+                new object[]
+            {
+                intptr_37
+            });
+        }
+
+        internal Enum20[] method_31(IntPtr intptr_37)
+        {
+            List<Enum20> list = new List<Enum20>();
+            IntPtr intPtr = this.method_13(intptr_37);//mono_method_signature
+            Struct109 @struct = this.externalProcessMemory_0.Read<Struct109>(intPtr);
+            IntPtr pointer = intPtr + 12;
+            for (int i = 1; i < (int)(@struct.ushort_0 + 1); i++)
+            {
+                IntPtr addr = this.externalProcessMemory_0.Read<IntPtr>(pointer + i * 4);
+                Enum20 uint32_ = (Enum20)this.externalProcessMemory_0.Read<Struct110>(addr).UInt32_1;
+                list.Add(uint32_);
+            }
+            return list.ToArray();
+        }
+
+
+        internal IntPtr method_33(IntPtr intptr_37, string string_0, params Enum20[] enum20_0)
+        {
+            while (intptr_37 != IntPtr.Zero)
+            {
+                using (AllocatedMemory allocatedMemory = this.externalProcessMemory_0.CreateAllocatedMemory(256))
+                {
+                    allocatedMemory.AllocateOfChunk<IntPtr>("Itr");
+                    IntPtr intPtr;
+                    while ((intPtr = this.method_35(intptr_37, allocatedMemory["Itr"])) != IntPtr.Zero)//mono_class_get_methods
+                    {
+                        IntPtr address = this.method_37(intPtr);//mono_method_get_name
+                        if (this.externalProcessMemory_0.ReadStringA(address) == string_0)
+                        {
+                            if (enum20_0 != null)
+                            {
+                                Enum20[] array = this.method_31(intPtr);
+                                if (array.Length != enum20_0.Length || !array.SequenceEqual(enum20_0))
+                                {
+                                    continue;
+                                }
+                            }
+                            return intPtr;
+                        }
+                    }
+                    intptr_37 = this.method_25(intptr_37);
+                }
+            }
+            return IntPtr.Zero;
+        }
+
     }
 }

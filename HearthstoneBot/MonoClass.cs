@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using GreyMagic;
+using HearthstoneBot.Enums;
 using HearthstoneBot.Game;
 
 namespace HearthstoneBot
 {
-    class MonoClass
+    public class MonoClass
     {
         internal static ExternalProcessMemory ExternalProcessMemory_0
         {
@@ -20,6 +21,157 @@ namespace HearthstoneBot
             {
                 return TritonHs.Class276_0;
             }
+        }
+
+        public IntPtr Address { get; set; }
+
+        public string AssemblyPath { get; set; }
+
+        public string ClassNamespace { get; set; }
+
+        internal uint UInt32_0 { get; set; }
+
+        public virtual IntPtr GetClassInstance()
+        {
+            return this.Address;
+        }
+
+        internal MonoClass(string assembly, string classNamespace, string className)
+        {
+            this.AssemblyPath = assembly;
+            this.ClassNamespace = classNamespace;
+            this.ClassName = className;
+        }
+
+        public string ClassName { get; set; }
+
+        public string RealClassName { get; set; }
+
+        private IntPtr? nullable_0;
+        internal IntPtr IntPtr_0
+        {
+            get
+            {
+                IntPtr? intPtr = this.nullable_0;
+                if (intPtr == null)
+                {
+                    IntPtr? intPtr2 = this.nullable_0 = new IntPtr?(this.vmethod_0(this.AssemblyPath, this.ClassNamespace, this.ClassName));
+                    return intPtr2.Value;
+                }
+                return intPtr.GetValueOrDefault();
+            }
+        }
+
+        internal MonoClass(IntPtr address, string className) : this(TritonHs.MainAssemblyPath, "", className)
+        {
+            if (address == IntPtr.Zero)
+            {
+                throw new InvalidOperationException("Cannot create an instance of MonoClass with a backing pointer of Zero.");
+            }
+            this.Address = address;
+            this.UInt32_0 = MonoClass.Class276_0.method_10(address, true);//mono_gchandle_new
+            this.RealClassName = MonoClass.Class276_0.method_45(this.IntPtr_0);
+        }
+
+        /// <summary>
+        /// mono_object_get_class
+        /// </summary>
+        /// <param name="string_4"></param>
+        /// <param name="string_5"></param>
+        /// <param name="string_6"></param>
+        /// <returns></returns>
+        internal virtual IntPtr vmethod_0(string string_4, string string_5, string string_6)
+        {
+            if (this.Address != IntPtr.Zero)
+            {
+                return MonoClass.Class276_0.method_23(this.Address);//mono_object_get_class
+            }
+            return MonoClass.smethod_3(string_4, string_5, string_6);
+        }
+
+        internal IntPtr method_7(string string_4, Enum20[] enum20_0, params object[] object_0)
+        {
+            IntPtr classInstance = this.GetClassInstance();
+            if (classInstance == IntPtr.Zero)
+            {
+                throw new Exception("Cannot call a method on an object instance that has no address!");
+            }
+            IntPtr intPtr = this.method_0(string_4, enum20_0);
+            if (intPtr == IntPtr.Zero)
+            {
+                throw new MissingMethodException(this.ClassName, string_4);
+            }
+            return MonoClass.Class276_0.method_43(intPtr, classInstance, object_0);
+        }
+
+        internal IntPtr method_0(string string_4, Enum20[] enum20_0)
+        {
+            if (this.IntPtr_0 == IntPtr.Zero)
+            {
+                throw new InvalidOperationException("Cannot get a method pointer on an object that has no MonoClass pointer.");
+            }
+            return MonoClass.smethod_4(this.IntPtr_0, string_4, enum20_0);
+        }
+
+        private static readonly Dictionary<IntPtr, Dictionary<string, List<MonoClass.Class273>>> dictionary_3 = new Dictionary<IntPtr, Dictionary<string, List<MonoClass.Class273>>>();
+        private static IntPtr smethod_4(IntPtr intptr_1, string string_4, Enum20[] enum20_0)
+        {
+            MonoClass.Class274 @class = new MonoClass.Class274();
+            @class.string_0 = string_4;
+            @class.enum20_0 = enum20_0;
+            Dictionary<string, List<MonoClass.Class273>> dictionary;
+            if (!MonoClass.dictionary_3.TryGetValue(intptr_1, out dictionary))
+            {
+                MonoClass.dictionary_3.Add(intptr_1, new Dictionary<string, List<MonoClass.Class273>>());
+                dictionary = MonoClass.dictionary_3[intptr_1];
+            }
+            List<MonoClass.Class273> list;
+            if (!dictionary.TryGetValue(@class.string_0, out list))
+            {
+                dictionary.Add(@class.string_0, new List<MonoClass.Class273>());
+                list = dictionary[@class.string_0];
+            }
+            MonoClass.Class273 class2 = list.FirstOrDefault(new Func<MonoClass.Class273, bool>(@class.method_0));
+            if (class2 == null)
+            {
+                IntPtr intPtr = MonoClass.Class276_0.method_33(intptr_1, @class.string_0, @class.enum20_0);
+                if (intPtr != IntPtr.Zero)
+                {
+                    class2 = new MonoClass.Class273(@class.string_0, intPtr, @class.enum20_0);
+                    list.Add(class2);
+                }
+            }
+            if (class2 == null)
+            {
+                return IntPtr.Zero;
+            }
+            return class2.IntPtr_0;
+        }
+
+        internal void method_8(string string_4, params object[] object_0)
+        {
+            this.method_9(string_4, null, object_0);
+        }
+
+        internal void method_9(string string_4, Enum20[] enum20_0, params object[] object_0)
+        {
+            this.method_7(string_4, enum20_0, object_0);
+        }
+
+        private static readonly AllocatedMemory[] allocatedMemory_0 = new AllocatedMemory[32];
+        public static bool IsOutParam(int index, out IntPtr addr)
+        {
+            addr = IntPtr.Zero;
+            if (index < 0 || index >= 32)
+            {
+                return false;
+            }
+            if (MonoClass.allocatedMemory_0[index] != null)
+            {
+                addr = MonoClass.allocatedMemory_0[index].Address;
+                return true;
+            }
+            return false;
         }
 
         internal static T smethod_6<T>(string string_4, string string_5, string string_6, string string_7) where T : struct

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GreyMagic;
+using HearthstoneBot.Common;
 using HearthstoneBot.Enums;
 using HearthstoneBot.Game;
 

@@ -136,6 +136,7 @@
     <Compile Include="Mapping\Camera.cs" />
     <Compile Include="Mapping\GameState.cs" />
     <Compile Include="Mapping\PegUI.cs" />
+    <Compile Include="Mapping\PlayButton.cs" />
     <Compile Include="Mapping\RaycastHit.cs" />
     <Compile Include="Mapping\Screen.cs" />
     <Compile Include="Mapping\UberText.cs" />

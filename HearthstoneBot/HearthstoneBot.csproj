@@ -131,6 +131,7 @@
     <Compile Include="Game\Input.cs" />
     <Compile Include="Game\Interop.cs" />
     <Compile Include="MainWindow.cs" />
+    <Compile Include="Mapping\Camera.cs" />
     <Compile Include="Mapping\GameState.cs" />
     <Compile Include="Mapping\RaycastHit.cs" />
     <Compile Include="Mapping\Screen.cs" />

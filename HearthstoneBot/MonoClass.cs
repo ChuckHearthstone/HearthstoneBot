@@ -349,5 +349,20 @@ namespace HearthstoneBot
             }
             return MonoClass.ExternalProcessMemory_0.Read<T>(MonoClass.Class276_0.method_26(intPtr));
         }
+
+        internal T method_10<T>(string string_4, Enum20[] enum20_0, params object[] object_0) where T : struct
+        {
+            IntPtr intPtr = this.method_7(string_4, enum20_0, object_0);
+            if (intPtr == IntPtr.Zero)
+            {
+                return default(T);
+            }
+            if (typeof(T) == typeof(bool))
+            {
+                IntPtr addr = MonoClass.Class276_0.method_26(intPtr);
+                return (T)((object)(MonoClass.ExternalProcessMemory_0.Read<byte>(addr) > 0));
+            }
+            return MonoClass.ExternalProcessMemory_0.Read<T>(MonoClass.Class276_0.method_26(intPtr));
+        }
     }
 }

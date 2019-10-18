@@ -410,5 +410,32 @@ namespace HearthstoneBot
             }
             return intPtr;
         }
+
+        internal T method_15<T>(string string_4, Enum20[] enum20_0, params object[] object_0) where T : class
+        {
+            if (!typeof(T).IsClass)
+            {
+                throw new InvalidOperationException(string.Concat(new object[]
+                {
+                    typeof(T),
+                    " is not a class type. Please fix the method invocation for ",
+                    this.ClassName,
+                    ".",
+                    string_4,
+                    " to use Get<T> or GetString instead."
+                }));
+            }
+            IntPtr intPtr = this.method_7(string_4, enum20_0, object_0);
+            if (intPtr == IntPtr.Zero)
+            {
+                return default(T);
+            }
+            return FastObjectFactory.CreateObjectInstance<T>(intPtr);
+        }
+
+        internal T method_11<T>(string string_4, params object[] object_0) where T : struct
+        {
+            return this.method_10<T>(string_4, null, object_0);
+        }
     }
 }

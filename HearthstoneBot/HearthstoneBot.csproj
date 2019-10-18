@@ -138,6 +138,7 @@
     <Compile Include="Mapping\PegUI.cs" />
     <Compile Include="Mapping\RaycastHit.cs" />
     <Compile Include="Mapping\Screen.cs" />
+    <Compile Include="Mapping\UberText.cs" />
     <Compile Include="Mapping\Vector3.cs" />
     <Compile Include="Mapping\Version.cs" />
     <Compile Include="MonoClass.cs" />

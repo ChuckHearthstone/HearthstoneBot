@@ -364,5 +364,51 @@ namespace HearthstoneBot
             }
             return MonoClass.ExternalProcessMemory_0.Read<T>(MonoClass.Class276_0.method_26(intPtr));
         }
+
+        internal T method_3<T>(string string_4) where T : class
+        {
+            IntPtr intPtr = this.method_5(string_4);
+            if (intPtr == IntPtr.Zero)
+            {
+                return default(T);
+            }
+            return FastObjectFactory.CreateObjectInstance<T>(intPtr);
+        }
+
+        internal IntPtr method_5(string string_4)
+        {
+            IntPtr classInstance = this.GetClassInstance();
+            if (classInstance == IntPtr.Zero)
+            {
+                throw new Exception("Cannot call a method on an object instance that has no address!");
+            }
+            IntPtr intPtr = this.method_1(string_4);
+            if (intPtr == IntPtr.Zero)
+            {
+                throw new MissingFieldException(this.ClassName, string_4);
+            }
+            return MonoClass.Class276_0.method_22(classInstance, intPtr);
+        }
+
+        private static readonly Dictionary<IntPtr, Dictionary<string, IntPtr>> dictionary_4 = new Dictionary<IntPtr, Dictionary<string, IntPtr>>();
+        internal IntPtr method_1(string string_4)
+        {
+            Dictionary<string, IntPtr> dictionary;
+            if (!MonoClass.dictionary_4.TryGetValue(this.IntPtr_0, out dictionary))
+            {
+                MonoClass.dictionary_4.Add(this.IntPtr_0, new Dictionary<string, IntPtr>());
+                dictionary = MonoClass.dictionary_4[this.IntPtr_0];
+            }
+            IntPtr intPtr;
+            if (!dictionary.TryGetValue(string_4, out intPtr))
+            {
+                intPtr = MonoClass.Class276_0.method_34(this.IntPtr_0, string_4);
+                if (intPtr != IntPtr.Zero)
+                {
+                    dictionary.Add(string_4, intPtr);
+                }
+            }
+            return intPtr;
+        }
     }
 }

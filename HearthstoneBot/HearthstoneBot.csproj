@@ -134,6 +134,7 @@
     <Compile Include="Game\WindowInfoWin32.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="Mapping\Camera.cs" />
+    <Compile Include="Mapping\DeckPickerTrayDisplay.cs" />
     <Compile Include="Mapping\GameState.cs" />
     <Compile Include="Mapping\PegUI.cs" />
     <Compile Include="Mapping\PlayButton.cs" />

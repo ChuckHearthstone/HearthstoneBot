@@ -67,6 +67,7 @@ namespace HearthstoneBotApp
 
         private void ButtonPlay_Click(object sender, EventArgs e)
         {
+            DeckPickerTrayDisplay deckPickerTrayDisplay = DeckPickerTrayDisplay.Get();
             PlayButton playButton = deckPickerTrayDisplay.m_playButton;
             UberText newPlayButtonText2 = playButton.m_newPlayButtonText;
             Vector3 center = newPlayButtonText2.m_TextMeshGameObject.Renderer.Bounds.m_Center;

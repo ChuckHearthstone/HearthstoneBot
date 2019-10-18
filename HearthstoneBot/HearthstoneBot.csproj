@@ -127,11 +127,13 @@
     <Compile Include="Enums\Region.cs" />
     <Compile Include="Exception1.cs" />
     <Compile Include="Common\Hotkeys.cs" />
+    <Compile Include="Game\Client.cs" />
     <Compile Include="Game\Input.cs" />
     <Compile Include="Game\Interop.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="Mapping\GameState.cs" />
     <Compile Include="Mapping\RaycastHit.cs" />
+    <Compile Include="Mapping\Screen.cs" />
     <Compile Include="Mapping\Vector3.cs" />
     <Compile Include="Mapping\Version.cs" />
     <Compile Include="MonoClass.cs" />

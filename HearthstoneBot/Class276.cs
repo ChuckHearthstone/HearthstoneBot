@@ -821,7 +821,8 @@ namespace HearthstoneBot
                         num++;
                         num2 += num3;
                     }
-                    result = this.method_17<IntPtr>(this.intptr_26, new object[]
+                    result = this.method_17<IntPtr>(this.intptr_26,//mono_runtime_invoke
+                        new object[]
                     {
                         intptr_37,
                         intptr_38,
@@ -831,7 +832,8 @@ namespace HearthstoneBot
                 }
                 return result;
             }
-            return this.method_17<IntPtr>(this.intptr_26, new object[]
+            return this.method_17<IntPtr>(this.intptr_26,//mono_runtime_invoke
+                new object[]
             {
                 intptr_37,
                 intptr_38,

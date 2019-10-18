@@ -130,6 +130,8 @@
     <Compile Include="Game\Client.cs" />
     <Compile Include="Game\Input.cs" />
     <Compile Include="Game\Interop.cs" />
+    <Compile Include="Game\RectWin32.cs" />
+    <Compile Include="Game\WindowInfoWin32.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="Mapping\Camera.cs" />
     <Compile Include="Mapping\GameState.cs" />

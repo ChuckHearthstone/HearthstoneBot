@@ -483,5 +483,121 @@ namespace HearthstoneBot.Game
             }
         }
 
+        public static void ScreenToClient(int x, int y, int result = 1)
+        {
+            ProcessHookManager.Verify();
+            using (ProcessHookManager.ExternalProcessMemory_0.TemporaryCacheState(false))
+            {
+                ProcessHookManager.allocatedMemory_0.Write<int>(ProcessHookManager.int_4, x);
+                ProcessHookManager.allocatedMemory_0.Write<int>(ProcessHookManager.int_5, y);
+                ProcessHookManager.allocatedMemory_0.Write<int>(ProcessHookManager.int_6, result);
+            }
+        }
+
+        public enum StateEnum
+        {
+            // Token: 0x04000C6C RID: 3180
+            None,
+            // Token: 0x04000C6D RID: 3181
+            Enabled,
+            // Token: 0x04000C6E RID: 3182
+            Disabled
+        }
+
+        public static bool IsEnabled
+        {
+            get
+            {
+                return ProcessHookManager.State == ProcessHookManager.StateEnum.Enabled;
+            }
+        }
+
+        public static bool Verify()
+        {
+            using (ExternalProcessMemory_0.TemporaryCacheState(enabledTemporarily: false))
+            {
+                if (!IsEnabled)
+                {
+                    //ilog_0.ErrorFormat("[Verify] !IsEnabled.");
+                    return false;
+                }
+                byte[] array = ExternalProcessMemory_0.ReadBytes(intptr_1, 5);
+                byte[] array2 = ExternalProcessMemory_0.ReadBytes(intptr_0, 5);
+                byte[] array3 = ExternalProcessMemory_0.ReadBytes(intptr_2, 5);
+                byte[] array4 = ExternalProcessMemory_0.ReadBytes(intptr_3, 5);
+                byte[] array5 = ExternalProcessMemory_0.ReadBytes(intptr_4, 5);
+                bool flag = false;
+                for (int i = 0; i < 5; i++)
+                {
+                    if (byte_0[i] != array2[i])
+                    {
+                        flag = true;
+                        //ilog_0.ErrorFormat("[Verify] Verification failed for function #1. This will directly affect the bot.");
+                        break;
+                    }
+                }
+                for (int j = 0; j < 5; j++)
+                {
+                    if (byte_1[j] != array[j])
+                    {
+                        flag = true;
+                        //ilog_0.ErrorFormat("[Verify] Verification failed for function #2. This will directly affect the bot.");
+                        break;
+                    }
+                }
+                for (int k = 0; k < 5; k++)
+                {
+                    if (byte_2[k] != array3[k])
+                    {
+                        flag = true;
+                        //ilog_0.ErrorFormat("[Verify] Verification failed for function #4. This will directly affect the bot.");
+                        break;
+                    }
+                }
+                for (int l = 0; l < 5; l++)
+                {
+                    if (byte_3[l] != array4[l])
+                    {
+                        flag = true;
+                        //ilog_0.ErrorFormat("[Verify] Verification failed for function #5. This will directly affect the bot.");
+                        break;
+                    }
+                }
+                for (int m = 0; m < 5; m++)
+                {
+                    if (byte_4[m] != array5[m])
+                    {
+                        flag = true;
+                        //ilog_0.ErrorFormat("[Verify] Verification failed for function #6. This will directly affect the bot.");
+                        break;
+                    }
+                }
+                return !flag;
+            }
+        }
+
+        public static WindowInfoWin32 WindowInfo
+        {
+            get
+            {
+                WindowInfoWin32 result = new WindowInfoWin32
+                {
+                    Size = (uint)MarshalCache<WindowInfoWin32>.Size
+                };
+                Interop.GetWindowInfo(ProcessHookManager.IntPtr_0, ref result);
+                return result;
+            }
+        }
+
+        public static void SetCursorPos(int x, int y, int result = 1)
+        {
+            ProcessHookManager.Verify();
+            using (ProcessHookManager.ExternalProcessMemory_0.TemporaryCacheState(false))
+            {
+                ProcessHookManager.allocatedMemory_0.Write<int>(ProcessHookManager.int_1, x);
+                ProcessHookManager.allocatedMemory_0.Write<int>(ProcessHookManager.int_2, y);
+                ProcessHookManager.allocatedMemory_0.Write<int>(ProcessHookManager.int_3, result);
+            }
+        }
     }
 }

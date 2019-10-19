@@ -46,7 +46,7 @@ namespace HearthstoneBot.Common
         {
             try
             {
-                for (;;)
+                while (true)
                 {
                     Thread.Sleep(100);
                     if (Hotkeys.Boolean_0)
@@ -55,19 +55,28 @@ namespace HearthstoneBot.Common
                         {
                             if (!bool_0)
                             {
-                                mouseEventDelegate_0?.Invoke();
+                                if (mouseEventDelegate_0 != null)
+                                {
+                                    mouseEventDelegate_0();
+                                }
                                 bool_0 = true;
                             }
                         }
                         else if (bool_0)
                         {
-                            mouseEventDelegate_1?.Invoke();
+                            if (mouseEventDelegate_1 != null)
+                            {
+                                mouseEventDelegate_1();
+                            }
                             bool_0 = false;
                         }
                     }
                     else if (bool_0)
                     {
-                        mouseEventDelegate_1?.Invoke();
+                        if (mouseEventDelegate_1 != null)
+                        {
+                            mouseEventDelegate_1();
+                        }
                         bool_0 = false;
                     }
                 }

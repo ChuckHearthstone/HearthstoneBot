@@ -74,69 +74,86 @@ namespace HearthstoneBot.Common
         private static readonly Queue<Hotkey> queue_1 = new Queue<Hotkey>();
         private static void smethod_3()
         {
-            for (; ; )
+            try
             {
-                Queue<Hotkey> queue = new Queue<Hotkey>();
-                Queue<Hotkey> queue2 = new Queue<Hotkey>();
-                Queue<Hotkey> obj = Hotkeys.queue_0;
-                lock (obj)
+                for (;;)
                 {
-                    while (Hotkeys.queue_0.Count != 0)
+                    Queue<Hotkey> queue = new Queue<Hotkey>();
+                    Queue<Hotkey> queue2 = new Queue<Hotkey>();
+                    Queue<Hotkey> obj = Hotkeys.queue_0;
+                    lock (obj)
                     {
-                        queue.Enqueue(Hotkeys.queue_0.Dequeue());
-                    }
-                    obj = Hotkeys.queue_1;
-                }
-
-                bool flag = false;
-                try
-                {
-                    Monitor.Enter(obj, ref flag);
-                    while (Hotkeys.queue_1.Count != 0)
-                    {
-                        queue2.Enqueue(Hotkeys.queue_1.Dequeue());
-                    }
-                }
-                finally
-                {
-                    if (flag)
-                    {
-                        Monitor.Exit(obj);
-                    }
-                }
-                Hotkeys.smethod_0(queue.Dequeue());
-                if (queue.Count == 0)
-                {
-                    while (queue2.Count != 0)
-                    {
-                        Hotkeys.smethod_1(queue2.Dequeue());
-                    }
-                    if (!Hotkeys.Boolean_0)
-                    {
-                        using (List<Hotkey>.Enumerator enumerator = Hotkeys.list_0.GetEnumerator())
+                        while (Hotkeys.queue_0.Count != 0)
                         {
-                            while (enumerator.MoveNext())
-                            {
-                                Hotkey hotkey_ = enumerator.Current;
-                                Hotkeys.smethod_1(hotkey_);
-                            }
-                            goto IL_11C;
+                            queue.Enqueue(Hotkeys.queue_0.Dequeue());
                         }
-                        goto IL_DE;
+
+                        obj = Hotkeys.queue_1;
                     }
-                    goto IL_DE;
-                    IL_11C:
-                    Thread.Sleep(100);
-                    continue;
-                    IL_DE:
-                    foreach (Hotkey hotkey_2 in Hotkeys.list_0)
+
+                    bool flag = false;
+                    try
                     {
-                        Hotkeys.smethod_0(hotkey_2);
+                        Monitor.Enter(obj, ref flag);
+                        while (Hotkeys.queue_1.Count != 0)
+                        {
+                            queue2.Enqueue(Hotkeys.queue_1.Dequeue());
+                        }
                     }
-                    MouseHook.smethod_0();
-                    Hotkeys.smethod_4();
-                    goto IL_11C;
+                    finally
+                    {
+                        if (flag)
+                        {
+                            Monitor.Exit(obj);
+                        }
+                    }
+
+                    Hotkeys.smethod_0(queue.Dequeue());
+                    if (queue.Count == 0)
+                    {
+                        while (queue2.Count != 0)
+                        {
+                            Hotkeys.smethod_1(queue2.Dequeue());
+                        }
+
+                        if (!Hotkeys.Boolean_0)
+                        {
+                            using (List<Hotkey>.Enumerator enumerator = Hotkeys.list_0.GetEnumerator())
+                            {
+                                while (enumerator.MoveNext())
+                                {
+                                    Hotkey hotkey_ = enumerator.Current;
+                                    Hotkeys.smethod_1(hotkey_);
+                                }
+
+                                goto IL_11C;
+                            }
+
+                            goto IL_DE;
+                        }
+
+                        goto IL_DE;
+                        IL_11C:
+                        Thread.Sleep(100);
+                        continue;
+                        IL_DE:
+                        foreach (Hotkey hotkey_2 in Hotkeys.list_0)
+                        {
+                            Hotkeys.smethod_0(hotkey_2);
+                        }
+
+                        MouseHook.smethod_0();
+                        Hotkeys.smethod_4();
+                        goto IL_11C;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                EventNotifyManager.Instance.OnChildThreadExceptionOccured(new ChildThreadExceptionOccuredEventArgs
+                {
+                    Exception = ex
+                });
             }
         }
 

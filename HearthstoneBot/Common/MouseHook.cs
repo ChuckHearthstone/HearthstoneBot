@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -43,17 +44,25 @@ namespace HearthstoneBot.Common
 
         private static void smethod_1()
         {
-            for (; ; )
+            try
             {
-                Thread.Sleep(100);
-                if (Hotkeys.Boolean_0)
+                for (;;)
                 {
-                    if (Boolean_0)
+                    Thread.Sleep(100);
+                    if (Hotkeys.Boolean_0)
                     {
-                        if (!bool_0)
+                        if (Boolean_0)
                         {
-                            mouseEventDelegate_0?.Invoke();
-                            bool_0 = true;
+                            if (!bool_0)
+                            {
+                                mouseEventDelegate_0?.Invoke();
+                                bool_0 = true;
+                            }
+                        }
+                        else if (bool_0)
+                        {
+                            mouseEventDelegate_1?.Invoke();
+                            bool_0 = false;
                         }
                     }
                     else if (bool_0)
@@ -62,11 +71,13 @@ namespace HearthstoneBot.Common
                         bool_0 = false;
                     }
                 }
-                else if (bool_0)
+            }
+            catch (Exception ex)
+            {
+                EventNotifyManager.Instance.OnChildThreadExceptionOccured(new ChildThreadExceptionOccuredEventArgs
                 {
-                    mouseEventDelegate_1?.Invoke();
-                    bool_0 = false;
-                }
+                    Exception = ex
+                });
             }
         }
     }

@@ -117,6 +117,7 @@
     <Compile Include="Class9.cs" />
     <Compile Include="Common\AssemblyLoader.cs" />
     <Compile Include="Common\CodeCompiler.cs" />
+    <Compile Include="Common\EventNotifyManager.cs" />
     <Compile Include="Common\FastObjectFactory.cs" />
     <Compile Include="Common\Hotkey.cs" />
     <Compile Include="Common\TypeLoader.cs" />

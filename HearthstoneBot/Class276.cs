@@ -273,7 +273,8 @@ namespace HearthstoneBot
 
         internal T method_17<T>(IntPtr intptr_37, params object[] object_0) where T : struct
         {
-            return externalProcessMemory_0.CallInjected<T>(intptr_37, CallingConvention.Cdecl, object_0);
+            T temp = externalProcessMemory_0.CallInjected<T>(intptr_37, CallingConvention.Cdecl, object_0);
+            return temp;
         }
 
         internal IntPtr method_19(string string_0)
@@ -832,14 +833,15 @@ namespace HearthstoneBot
                 }
                 return result;
             }
-            return this.method_17<IntPtr>(this.intptr_26,//mono_runtime_invoke
+            IntPtr temp= this.method_17<IntPtr>(this.intptr_26,//mono_runtime_invoke
                 new object[]
-            {
-                intptr_37,
-                intptr_38,
-                IntPtr.Zero,
-                IntPtr.Zero
-            });
+                {
+                    intptr_37,
+                    intptr_38,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                });
+            return temp;
         }
 
         /// <summary>

@@ -327,7 +327,9 @@ namespace HearthstoneBot
             {
                 return IntPtr.Zero;
             }
-            return MonoClass.Class276_0.method_43(intPtr2, IntPtr.Zero, object_0);
+
+            IntPtr temp = MonoClass.Class276_0.method_43(intPtr2, IntPtr.Zero, object_0);
+            return temp;
         }
 
         internal static T smethod_14<T>(string string_4, string string_5, string string_6, string string_7, params object[] object_0) where T : struct

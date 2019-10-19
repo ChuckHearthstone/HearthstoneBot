@@ -159,7 +159,17 @@ namespace HearthstoneBot.Game
             return externalProcessMemory_0.AcquireFrame(true);
         }
 
-        public static ExternalProcessMemory Memory => externalProcessMemory_0;
+        public static ExternalProcessMemory Memory
+        {
+            get
+            {
+                if (externalProcessMemory_0 == null)
+                {
+                    throw new Exception($"externalProcessMemory_0 in TritonHs is null ");
+                }
+                return externalProcessMemory_0;
+            }
+        }
 
         public static void InvokeEvent(Delegate d, params object[] args)
         {
